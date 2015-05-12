@@ -29,6 +29,9 @@
 		1A41DC571B02415D00ECFAB1 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A41DC531B02415D00ECFAB1 /* Parse.framework */; };
 		1A41DC581B02415D00ECFAB1 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A41DC541B02415D00ECFAB1 /* ParseFacebookUtils.framework */; };
 		1A41DC591B02415D00ECFAB1 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A41DC551B02415D00ECFAB1 /* ParseFacebookUtilsV4.framework */; };
+		1A41DC5E1B02493D00ECFAB1 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A41DC5B1B02493D00ECFAB1 /* FBSDKLoginKit.framework */; };
+		1A41DC5F1B02493D00ECFAB1 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A41DC5C1B02493D00ECFAB1 /* FBSDKShareKit.framework */; };
+		1A41DC611B024F1200ECFAB1 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A41DC601B024F1200ECFAB1 /* FBSDKCoreKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +73,9 @@
 		1A41DC531B02415D00ECFAB1 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		1A41DC541B02415D00ECFAB1 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		1A41DC551B02415D00ECFAB1 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
+		1A41DC5B1B02493D00ECFAB1 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		1A41DC5C1B02493D00ECFAB1 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		1A41DC601B024F1200ECFAB1 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +83,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A41DC611B024F1200ECFAB1 /* FBSDKCoreKit.framework in Frameworks */,
+				1A41DC5E1B02493D00ECFAB1 /* FBSDKLoginKit.framework in Frameworks */,
 				1A41DC581B02415D00ECFAB1 /* ParseFacebookUtils.framework in Frameworks */,
 				1A41DC4D1B02400900ECFAB1 /* CoreLocation.framework in Frameworks */,
 				1A41DC4B1B023F2A00ECFAB1 /* CoreGraphics.framework in Frameworks */,
@@ -90,6 +98,7 @@
 				1A41DC3F1B023EDA00ECFAB1 /* StoreKit.framework in Frameworks */,
 				1A41DC3D1B023ED300ECFAB1 /* SystemConfiguration.framework in Frameworks */,
 				1A41DC3B1B023ECB00ECFAB1 /* AudioToolbox.framework in Frameworks */,
+				1A41DC5F1B02493D00ECFAB1 /* FBSDKShareKit.framework in Frameworks */,
 				1A41DC391B023EC300ECFAB1 /* CFNetwork.framework in Frameworks */,
 				1A41DC591B02415D00ECFAB1 /* ParseFacebookUtilsV4.framework in Frameworks */,
 			);
@@ -108,6 +117,9 @@
 		1A41DC061B023E9200ECFAB1 = {
 			isa = PBXGroup;
 			children = (
+				1A41DC601B024F1200ECFAB1 /* FBSDKCoreKit.framework */,
+				1A41DC5B1B02493D00ECFAB1 /* FBSDKLoginKit.framework */,
+				1A41DC5C1B02493D00ECFAB1 /* FBSDKShareKit.framework */,
 				1A41DC521B02415D00ECFAB1 /* Bolts.framework */,
 				1A41DC531B02415D00ECFAB1 /* Parse.framework */,
 				1A41DC541B02415D00ECFAB1 /* ParseFacebookUtils.framework */,
@@ -413,6 +425,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FindMyFriends.xcodeproj",
 					"$(PROJECT_DIR)",
+					/Users/yungdai/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = FindMyFriends/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -428,6 +441,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/FindMyFriends.xcodeproj",
 					"$(PROJECT_DIR)",
+					/Users/yungdai/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = FindMyFriends/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
