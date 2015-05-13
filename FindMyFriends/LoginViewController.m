@@ -198,7 +198,7 @@
 // get the username text, store it in the app delegate for now
 - (void)processFieldEntries {
     
-    PFUser *user = [PFUser user];
+
     NSString *userName = self.usernameField.text;
     NSString *password = self.passwordField.text;
     NSString *noUsernameText = @"username";
@@ -257,7 +257,7 @@
     [PFUser logInWithUsernameInBackground:userName password:password block:^(PFUser *user, NSError *error) {
         self.activityViewVisible = NO;
         
-        if (!user) {
+        if (user) {
             [self.delegate loginViewControllerDidLogin:self];
             
         } else {
@@ -277,13 +277,11 @@
                                                      otherButtonTitles:@"OK", nil];
             [alertView show];
             
-            
-            
+            // Bring the keyboard back up, because they'll probably need to change something.
+            [self.usernameField becomeFirstResponder];
             
         }
     }];
-    // Bring the keyboard back up, because they'll probably need to change something.
-    [self.usernameField becomeFirstResponder];
     
 }
 

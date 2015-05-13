@@ -56,6 +56,26 @@
 }
 
 
+// after you have logged in preset the WallViewController
+- (void)loginViewControllerDidLogin:(LoginViewController *)controller {
+//    [self presentWallViewControllerAnimated:YES];
+}
+
+- (void)presentLoginViewController {
+    // Go to the welcome screen and have them log in or create an account.
+    LoginViewController *viewController = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
+    viewController.delegate = self;
+    [self.navigationController setViewControllers:@[ viewController ] animated:NO];
+}
+
+
+//- (void)settingsViewControllerDidLogout:(SettingsViewController *)controller {
+//    [controller dismissViewControllerAnimated:YES completion:nil];
+//    [self presentLoginViewController];
+//}
+
+
+
 // WallViewController
 
 //- (void)presentWallViewControllerAnimated:(BOOL)animated {

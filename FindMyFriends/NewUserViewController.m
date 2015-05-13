@@ -89,8 +89,6 @@
     NSString *passwordMismatchText = @"enter the same password twice";
     
     BOOL textError = NO;
-    
-    
 
     
     // Messaging nil will return 0, so these checks implicitly check for nil text.
@@ -142,13 +140,16 @@
     
     [self.view addSubview:activityView];
     
-    // create a PFUser Object for each new user
+    
+    // Call into an object somewhere that has code for setting up a user.
+    // The app delegate cares about this, but so do a lot of other objects.
+    // For now, do this inline.
+
     PFUser *user = [PFUser user];
     user.username = username;
     user.password = password;
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error){
-        
-        
+
         // if there is an error
         if (error) {
             UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:[error userInfo][@"error"]
