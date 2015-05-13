@@ -8,6 +8,10 @@
 
 #import "LoginViewController.h"
 
+// adding in the NewUser and ActivityView  to be used
+#import "NewUserViewController.h"
+#import "ActivityView.h"
+
 // Facebook API required API's
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
@@ -19,7 +23,7 @@
 @interface LoginViewController ()
 
 // declare my delegates
-<UITextFieldDelegate, LoginViewControllerDelegate>
+<UITextFieldDelegate, NewUserViewControllerDelegate, LoginViewControllerDelegate>
 
 // declare properties for the implimentation
 
@@ -38,8 +42,6 @@
 @implementation LoginViewController
 
 // method to deallocate the NSNotificaiton Controller
-
-
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -51,8 +53,19 @@
     // Facebook API setup
     FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc]init];
     
+    if ([FBSDKAccessToken currentAccessToken]) {
+        // User is logged in, do work such as go to next view controller.
+    }
+    
     //  requeting and setting the user data from Facebook
     [self _loadData];
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                           action:@selector(dismissKeyboard)];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapGestureRecognizer];
+    
+    [self registerForKeyboardNotifications];
 
 }
 
@@ -127,13 +140,39 @@
     // Login PFUser using Facebook
     [PFFacebookUtils logInInBackgroundWithReadPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
         if (!user) {
+            // Hid the activity view
+            self.activityViewVisible = NO;
             NSLog(@"Uh oh. The user cancelled the Facebook login.");
         } else if (user.isNew) {
             NSLog(@"User signed up and logged in through Facebook!");
         } else {
             NSLog(@"User logged in through Facebook!");
         }
+        
+        
+        // If the user is not linked with the parse user link the parse user with Facebook
+        if (![PFFacebookUtils isLinkedWithUser:user]) {
+            [PFFacebookUtils linkUserInBackground:user withReadPermissions:nil block:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    NSLog(@"Woohoo, user is linked with Facebook!");
+                }
+            }];
+        }
+        
+        
     }];
+    
+    
+    // Request new Publish Permissions
+    [PFFacebookUtils logInInBackgroundWithPublishPermissions:@[ @"publish_actions" ] block:^(PFUser *user, NSError *error) {
+        if (!user) {
+            NSLog(@"Uh oh. The user cancelled the Facebook login.");
+        } else {
+            NSLog(@"User now has publish permissions!");
+        }
+    }];
+    
+    
 }
     
 
@@ -231,9 +270,74 @@
     
 }
 
+
+// when a user new user signs up (this is part of the required NewUserViewController Delegate/Protocol)
+- (void)newUserViewControllerDidiSignup:(NewUserViewController *)controller {
+    
+    //assign self as the delegate for the logingViewControllerDidLogin
+    [self.delegate loginViewControllerDidLogin:self];
+    //signup successful
+}
+
+
+// When the app delegate sets up the LoginViewController it can set itself up as the delegate for that view controller.
+- (void)presentLoginViewController:(NewUserViewController *)controller {
+    LoginViewController *viewController = [[LoginViewController alloc]initWithNibName:nil
+                                                                               bundle:nil];
+    viewController.delegate = self;
+    [self.navigationController setViewControllers:@[ viewController ] animated:NO];
+    
+}
+
+
+
+// When the LoginViewController instantiates and presents the NewUserViewController, it sets itself up as the delegate so it can be notified when a user signs up:
+- (void)presentNewUserViewController {
+    NewUserViewController *viewController  = [[NewUserViewController alloc]initWithNibName:nil
+                                                                                    bundle:nil];
+    
+    viewController.delegate = self;
+    [self.navigationController presentViewController:viewController
+                                            animated:YES
+                                          completion:nil];
+    
+}
+
+// The app delegate can implement the required delegate method to display the main view controller
+- (void) loginViewControllerDidLogin:(LoginViewController *)controller {
+    // private method to display the main view controller
+//    [self presentWallViewControllerAnimated: YES];
+}
+
+
+
 // this method dismisses the keyboard
 - (void)dismissKeyboard {
+    
     [self.view endEditing:YES];
+}
+
+- (void)registerForKeyboardNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardWillShow:(NSNotification*)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    CGRect endFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+
+    
+}
+
+- (void)keyboardWillHide:(NSNotification*)notification {
+    NSDictionary *userInfo = [notification userInfo];
+
+
 }
 
 - (IBAction)loginWithFacebookPressed:(id)sender {

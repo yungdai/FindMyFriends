@@ -31,12 +31,10 @@
 		1A41DC591B02415D00ECFAB1 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A41DC551B02415D00ECFAB1 /* ParseFacebookUtilsV4.framework */; };
 		1A41DC5E1B02493D00ECFAB1 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A41DC5B1B02493D00ECFAB1 /* FBSDKLoginKit.framework */; };
 		1A41DC5F1B02493D00ECFAB1 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A41DC5C1B02493D00ECFAB1 /* FBSDKShareKit.framework */; };
-<<<<<<< HEAD
-		1A41DC611B024F1200ECFAB1 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A41DC601B024F1200ECFAB1 /* FBSDKCoreKit.framework */; };
 		1A41DC671B02697100ECFAB1 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A41DC661B02697100ECFAB1 /* LoginViewController.m */; };
 		1A41DC6D1B02C49F00ECFAB1 /* NewUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A41DC6C1B02C49F00ECFAB1 /* NewUserViewController.m */; };
-=======
->>>>>>> NSNotificaitonCenter
+		1A6289B91B03B7D4005186A5 /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6289B81B03B7D4005186A5 /* ActivityView.m */; };
+		1A6289BD1B03D187005186A5 /* WallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6289BC1B03D187005186A5 /* WallViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,14 +79,14 @@
 		1A41DC551B02415D00ECFAB1 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		1A41DC5B1B02493D00ECFAB1 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		1A41DC5C1B02493D00ECFAB1 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
-<<<<<<< HEAD
-		1A41DC601B024F1200ECFAB1 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		1A41DC651B02697100ECFAB1 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		1A41DC661B02697100ECFAB1 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		1A41DC6B1B02C49F00ECFAB1 /* NewUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserViewController.h; sourceTree = "<group>"; };
 		1A41DC6C1B02C49F00ECFAB1 /* NewUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserViewController.m; sourceTree = "<group>"; };
-=======
->>>>>>> NSNotificaitonCenter
+		1A6289B71B03B7D4005186A5 /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityView.h; sourceTree = "<group>"; };
+		1A6289B81B03B7D4005186A5 /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityView.m; sourceTree = "<group>"; };
+		1A6289BB1B03D187005186A5 /* WallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WallViewController.h; sourceTree = "<group>"; };
+		1A6289BC1B03D187005186A5 /* WallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WallViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,15 +186,13 @@
 		1A41DC111B023E9200ECFAB1 /* FindMyFriends */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
 				1A41DC6E1B02C91A00ECFAB1 /* Views */,
 				1A41DC631B0267E800ECFAB1 /* Controllers */,
+				1A6289BA1B03D154005186A5 /* FindMyFriends View and Posts */,
 				1A41DC621B0267E200ECFAB1 /* Models */,
-=======
 				1A0620881B02D33200826770 /* Constants.h */,
 				1A0620871B02D2F500826770 /* Controllers */,
 				1A0620861B02D2EE00826770 /* Models */,
->>>>>>> NSNotificaitonCenter
 				1A41DC161B023E9200ECFAB1 /* AppDelegate.h */,
 				1A41DC171B023E9200ECFAB1 /* AppDelegate.m */,
 				1A41DC1C1B023E9200ECFAB1 /* Main.storyboard */,
@@ -262,8 +258,19 @@
 		1A41DC6E1B02C91A00ECFAB1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1A6289B71B03B7D4005186A5 /* ActivityView.h */,
+				1A6289B81B03B7D4005186A5 /* ActivityView.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		1A6289BA1B03D154005186A5 /* FindMyFriends View and Posts */ = {
+			isa = PBXGroup;
+			children = (
+				1A6289BB1B03D187005186A5 /* WallViewController.h */,
+				1A6289BC1B03D187005186A5 /* WallViewController.m */,
+			);
+			name = "FindMyFriends View and Posts";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -367,10 +374,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A41DC671B02697100ECFAB1 /* LoginViewController.m in Sources */,
+				1A6289BD1B03D187005186A5 /* WallViewController.m in Sources */,
 				1A41DC181B023E9200ECFAB1 /* AppDelegate.m in Sources */,
 				1A41DC6D1B02C49F00ECFAB1 /* NewUserViewController.m in Sources */,
 				1A41DC151B023E9200ECFAB1 /* main.m in Sources */,
 				1A06208F1B02D53B00826770 /* FindMyFriendsWallViewController.m in Sources */,
+				1A6289B91B03B7D4005186A5 /* ActivityView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

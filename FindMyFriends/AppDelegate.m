@@ -14,8 +14,15 @@
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <Parse/Parse.h>
 
+// constant file variables
+#import "Constants.h"
 
-@interface AppDelegate ()
+// the different view controllers
+#import "LoginViewController.h"
+#import "WallViewController.h"
+
+
+@interface AppDelegate ()<LoginViewControllerDelegate>
 
 @end
 
@@ -47,6 +54,15 @@
                                                 sourceApplication:sourceApplication
                                                        annotation:annotation];
 }
+
+
+// WallViewController
+
+//- (void)presentWallViewControllerAnimated:(BOOL)animated {
+//    WallViewController *wallViewController = [[wallViewController alloc] initWithNibName:nil bundle:nil];
+//    wallViewController.delegate = self;
+//    [self.navigationController setViewControllers:@[ wallViewController ] animated:animated];
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

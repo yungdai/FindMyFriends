@@ -12,6 +12,8 @@
 // start setup of my own delegate/protocol
 // create my own protocol called LoginViewControllerDelegate
 @class LoginViewController;
+
+// define a protocol that delegates can adopt to be notified of a successful login or sign up:
 @protocol LoginViewControllerDelegate <NSObject>
 
 - (void)loginViewControllerDidLogin:(LoginViewController *)controller;

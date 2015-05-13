@@ -16,9 +16,20 @@
 #import <Parse/Parse.h>
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 
+@class NewUserViewController;
+
+@protocol NewUserViewControllerDelegate <NSObject>
+
+- (void)newUserViewControllerDidiSignup:(NewUserViewController *)controller;
+
+@end
+
 
 @interface NewUserViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UITextField *usernameFied;
+
+@property (weak, nonatomic) id<NewUserViewControllerDelegate> delegate;
+
+@property (strong, nonatomic) IBOutlet UITextField *usernameField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordAgainField;
 
