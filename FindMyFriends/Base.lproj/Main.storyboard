@@ -147,8 +147,8 @@
                     </view>
                     <connections>
                         <outlet property="loginButton" destination="4rY-eN-okt" id="i4C-aX-WTn"/>
-                        <outlet property="passwordField" destination="f3f-mY-E0I" id="FTa-MD-wrM"/>
-                        <outlet property="usernameField" destination="BWp-UR-vwG" id="vJe-g0-ZKO"/>
+                        <outlet property="passwordField" destination="BWp-UR-vwG" id="zUN-Hj-lhU"/>
+                        <outlet property="usernameField" destination="f3f-mY-E0I" id="Bwj-HA-ZV7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
