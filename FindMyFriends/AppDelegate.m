@@ -9,7 +9,11 @@
 #import "AppDelegate.h"
 
 // add facebook SDK
+// Parse Facebook  setup
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+#import <Parse/Parse.h>
+
 
 @interface AppDelegate ()
 
@@ -26,6 +30,8 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [Parse setApplicationId:@"WTIpjvmocLnKmjegvp4Z1CHNnbP0IMKwjvJoUPqH" clientKey:@"CfIcbjiWafImIzBiiHBsK4BFGLaEgyd4QWFoPrPI"];
+    [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
     
     // Override point for customization after application launch.
     return [[FBSDKApplicationDelegate sharedInstance] application:application

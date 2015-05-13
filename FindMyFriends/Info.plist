@@ -29,7 +29,7 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>FaceBookAppID</key>
+	<key>FacebookAppID</key>
 	<string>837170403031337</string>
 	<key>FacebookDisplayName</key>
 	<string>Find My Friends Assignment</string>

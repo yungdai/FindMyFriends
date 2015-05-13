@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1A41DC151B023E9200ECFAB1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A41DC141B023E9200ECFAB1 /* main.m */; };
 		1A41DC181B023E9200ECFAB1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A41DC171B023E9200ECFAB1 /* AppDelegate.m */; };
-		1A41DC1B1B023E9200ECFAB1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A41DC1A1B023E9200ECFAB1 /* ViewController.m */; };
 		1A41DC1E1B023E9200ECFAB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A41DC1C1B023E9200ECFAB1 /* Main.storyboard */; };
 		1A41DC201B023E9200ECFAB1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A41DC1F1B023E9200ECFAB1 /* Images.xcassets */; };
 		1A41DC231B023E9300ECFAB1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A41DC211B023E9300ECFAB1 /* LaunchScreen.xib */; };
@@ -27,11 +26,12 @@
 		1A41DC4D1B02400900ECFAB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A41DC4C1B02400900ECFAB1 /* CoreLocation.framework */; };
 		1A41DC561B02415D00ECFAB1 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A41DC521B02415D00ECFAB1 /* Bolts.framework */; };
 		1A41DC571B02415D00ECFAB1 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A41DC531B02415D00ECFAB1 /* Parse.framework */; };
-		1A41DC581B02415D00ECFAB1 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A41DC541B02415D00ECFAB1 /* ParseFacebookUtils.framework */; };
 		1A41DC591B02415D00ECFAB1 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A41DC551B02415D00ECFAB1 /* ParseFacebookUtilsV4.framework */; };
 		1A41DC5E1B02493D00ECFAB1 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A41DC5B1B02493D00ECFAB1 /* FBSDKLoginKit.framework */; };
 		1A41DC5F1B02493D00ECFAB1 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A41DC5C1B02493D00ECFAB1 /* FBSDKShareKit.framework */; };
 		1A41DC611B024F1200ECFAB1 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A41DC601B024F1200ECFAB1 /* FBSDKCoreKit.framework */; };
+		1A41DC671B02697100ECFAB1 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A41DC661B02697100ECFAB1 /* LoginViewController.m */; };
+		1A41DC6D1B02C49F00ECFAB1 /* NewUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A41DC6C1B02C49F00ECFAB1 /* NewUserViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,8 +50,6 @@
 		1A41DC141B023E9200ECFAB1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1A41DC161B023E9200ECFAB1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1A41DC171B023E9200ECFAB1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		1A41DC191B023E9200ECFAB1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		1A41DC1A1B023E9200ECFAB1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		1A41DC1D1B023E9200ECFAB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1A41DC1F1B023E9200ECFAB1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1A41DC221B023E9300ECFAB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -71,11 +69,14 @@
 		1A41DC4C1B02400900ECFAB1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1A41DC521B02415D00ECFAB1 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		1A41DC531B02415D00ECFAB1 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
-		1A41DC541B02415D00ECFAB1 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		1A41DC551B02415D00ECFAB1 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		1A41DC5B1B02493D00ECFAB1 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		1A41DC5C1B02493D00ECFAB1 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		1A41DC601B024F1200ECFAB1 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		1A41DC651B02697100ECFAB1 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		1A41DC661B02697100ECFAB1 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		1A41DC6B1B02C49F00ECFAB1 /* NewUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserViewController.h; sourceTree = "<group>"; };
+		1A41DC6C1B02C49F00ECFAB1 /* NewUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +86,6 @@
 			files = (
 				1A41DC611B024F1200ECFAB1 /* FBSDKCoreKit.framework in Frameworks */,
 				1A41DC5E1B02493D00ECFAB1 /* FBSDKLoginKit.framework in Frameworks */,
-				1A41DC581B02415D00ECFAB1 /* ParseFacebookUtils.framework in Frameworks */,
 				1A41DC4D1B02400900ECFAB1 /* CoreLocation.framework in Frameworks */,
 				1A41DC4B1B023F2A00ECFAB1 /* CoreGraphics.framework in Frameworks */,
 				1A41DC491B023F1500ECFAB1 /* libz.1.1.3.dylib in Frameworks */,
@@ -122,7 +122,6 @@
 				1A41DC5C1B02493D00ECFAB1 /* FBSDKShareKit.framework */,
 				1A41DC521B02415D00ECFAB1 /* Bolts.framework */,
 				1A41DC531B02415D00ECFAB1 /* Parse.framework */,
-				1A41DC541B02415D00ECFAB1 /* ParseFacebookUtils.framework */,
 				1A41DC551B02415D00ECFAB1 /* ParseFacebookUtilsV4.framework */,
 				1A41DC4C1B02400900ECFAB1 /* CoreLocation.framework */,
 				1A41DC4A1B023F2A00ECFAB1 /* CoreGraphics.framework */,
@@ -153,10 +152,11 @@
 		1A41DC111B023E9200ECFAB1 /* FindMyFriends */ = {
 			isa = PBXGroup;
 			children = (
+				1A41DC6E1B02C91A00ECFAB1 /* Views */,
+				1A41DC631B0267E800ECFAB1 /* Controllers */,
+				1A41DC621B0267E200ECFAB1 /* Models */,
 				1A41DC161B023E9200ECFAB1 /* AppDelegate.h */,
 				1A41DC171B023E9200ECFAB1 /* AppDelegate.m */,
-				1A41DC191B023E9200ECFAB1 /* ViewController.h */,
-				1A41DC1A1B023E9200ECFAB1 /* ViewController.m */,
 				1A41DC1C1B023E9200ECFAB1 /* Main.storyboard */,
 				1A41DC1F1B023E9200ECFAB1 /* Images.xcassets */,
 				1A41DC211B023E9300ECFAB1 /* LaunchScreen.xib */,
@@ -189,6 +189,39 @@
 				1A41DC2D1B023E9300ECFAB1 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1A41DC621B0267E200ECFAB1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		1A41DC631B0267E800ECFAB1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1A41DC641B02688300ECFAB1 /* User Create/Login */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		1A41DC641B02688300ECFAB1 /* User Create/Login */ = {
+			isa = PBXGroup;
+			children = (
+				1A41DC651B02697100ECFAB1 /* LoginViewController.h */,
+				1A41DC661B02697100ECFAB1 /* LoginViewController.m */,
+				1A41DC6B1B02C49F00ECFAB1 /* NewUserViewController.h */,
+				1A41DC6C1B02C49F00ECFAB1 /* NewUserViewController.m */,
+			);
+			name = "User Create/Login";
+			sourceTree = "<group>";
+		};
+		1A41DC6E1B02C91A00ECFAB1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,8 +324,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A41DC1B1B023E9200ECFAB1 /* ViewController.m in Sources */,
+				1A41DC671B02697100ECFAB1 /* LoginViewController.m in Sources */,
 				1A41DC181B023E9200ECFAB1 /* AppDelegate.m in Sources */,
+				1A41DC6D1B02C49F00ECFAB1 /* NewUserViewController.m in Sources */,
 				1A41DC151B023E9200ECFAB1 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
