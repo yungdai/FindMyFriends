@@ -52,7 +52,7 @@
     
     // Facebook API setup
     FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc]init];
-    
+
     if ([FBSDKAccessToken currentAccessToken]) {
         // User is logged in, do work such as go to next view controller.
     }
@@ -149,6 +149,23 @@
             NSLog(@"User logged in through Facebook!");
         }
         
+        FBSDKAccessToken *accessToken = [[FBSDKAccessToken alloc]init];
+        
+        // Log In (create/update currentUser) with FBSDKAccessToken
+        [PFFacebookUtils logInInBackgroundWithAccessToken:accessToken block:^(PFUser *user, NSError *error) {
+            if (!user) {
+                NSLog(@"Uh oh. There was an error logging in.");
+            } else {
+                NSLog(@"User logged in through Facebook!");
+            }
+        }];
+        
+        [PFFacebookUtils linkUserInBackground:user withAccessToken:accessToken block:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                NSLog(@"Woohoo, user is linked with Facebook!");
+            }
+        }];
+        
         
         // If the user is not linked with the parse user link the parse user with Facebook
         if (![PFFacebookUtils isLinkedWithUser:user]) {
@@ -240,7 +257,7 @@
     [PFUser logInWithUsernameInBackground:userName password:password block:^(PFUser *user, NSError *error) {
         self.activityViewVisible = NO;
         
-        if (user) {
+        if (!user) {
             [self.delegate loginViewControllerDidLogin:self];
             
         } else {
