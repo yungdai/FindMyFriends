@@ -71,36 +71,116 @@
 }
 
 - (void)_loadData {
-    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]initWithGraphPath:@"me" parameters:nil];
-    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-        if (!error) {
-            // get the dictionary with the user's Facebook data
-            NSDictionary *userData = (NSDictionary *)result;
+    // Set permissions required from the facebook user account
+    NSArray *permissionsArray = @[ @"email", @"public_profile", @"user_location"];
+    
+    // set up activityView
+    self.activityViewVisible = YES;
+    
+    // logging wiht PFUser using Facebook (this is a parse API to use Facebook)
+    // Login PFUser using Facebook
+    [PFFacebookUtils logInInBackgroundWithReadPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+        if (!user) {
+            // Hid the activity view
+            self.activityViewVisible = NO;
+            NSLog(@"Uh oh. The user cancelled the Facebook login.");
+        } else if (user.isNew) {
+            NSLog(@"User signed up and logged in through Facebook!");
+        } else {
+            NSLog(@"User logged in through Facebook!");
             
-            NSString *facebookID = userData[@"id"];
-            NSString *name = userData[@"name"];
-            NSString *location = userData[@"location"][@"name"];
-            NSString *gender = userData[@"gender"];
-            NSString *birthday = userData[@"birthday"];
-            NSString *relationship = userData[@"relationship_status"];
-            NSString *email = userData[@"email"];
             
-            
-            
+        }
         
-            // URL should point to https://graph.facebook.com/{facebookId}/picture?type=large&return_ssl_resources=1
-            NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
-            NSURLRequest *urlRequest = [NSURLRequest requestWithURL:pictureURL];
-            [NSURLConnection sendAsynchronousRequest:urlRequest
-                                               queue:[NSOperationQueue mainQueue]
-                                   completionHandler:
-             ^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                 if (connectionError == nil && data != nil) {
-                     // Set the image in the imageView
-                     // ...
-                 }
-             }];
-            
+        FBSDKAccessToken *accessToken = [[FBSDKAccessToken alloc]init];
+        
+        // Log In (create/update currentUser) with FBSDKAccessToken
+        [PFFacebookUtils logInInBackgroundWithAccessToken:accessToken block:^(PFUser *user, NSError *error) {
+            if (!user) {
+                NSLog(@"Uh oh. There was an error logging in.");
+            } else {
+                NSLog(@"User logged in through Facebook!");
+            }
+        }];
+        
+        
+        
+        
+        // If the user is not linked with the parse user link the parse user with Facebook
+        if (![PFFacebookUtils isLinkedWithUser:user]) {
+            [PFFacebookUtils linkUserInBackground:user withReadPermissions:nil block:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    NSLog(@"Woohoo, user is linked with Facebook!");
+                }
+            }];
+        }
+        
+        
+    }];
+    
+    
+    // Request new Publish Permissions
+    [PFFacebookUtils logInInBackgroundWithPublishPermissions:@[ @"publish_actions" ] block:^(PFUser *user, NSError *error) {
+        if (!user) {
+            NSLog(@"Uh oh. The user cancelled the Facebook login.");
+        } else {
+            NSLog(@"User now has publish permissions!");
+            FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]initWithGraphPath:@"me" parameters:nil];
+            [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                if (!error) {
+                    // get the dictionary with the user's Facebook data
+                    NSDictionary *userData = (NSDictionary *)result;
+                    
+                    NSString *facebookID = userData[@"id"];
+                    NSString *first_name = userData[@"first_name"];
+                    NSString *last_name = userData[@"last_name"];
+                    NSString *location = userData[@"location"][@"name"];
+                    NSString *gender = userData[@"gender"];
+                    NSString *name = userData[@"name"];
+                    NSString *timezone = userData[@"timezone"];
+                    NSString *locale = userData[@"locale"];
+                    
+                    
+                    [user setObject:first_name forKey:@"first_name"];
+                    [user setObject:last_name forKey:@"last_name"];
+                    [user setObject:location forKey:@"location"];
+                    [user setObject:gender forKey:@"gender"];
+                    [user setObject:name forKey:@"name"];
+                    [user setObject:timezone forKey:@"timezone"];
+                    [user setObject:locale forKey:@"locale"];
+                    
+                    
+                    
+                    
+                    // URL should point to https://graph.facebook.com/{facebookId}/picture?type=large&return_ssl_resources=1
+                    
+                    
+                    // Get an image from the URL below
+                    //UIImage *image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.objectgraph.com/images/og_logo.png"]]];
+                    
+                    
+                    // set up the UIImage variable for the facebook image
+                    NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
+                    
+                    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:pictureURL];
+                    NSData *facebookPhoto = [[NSData alloc]initWithContentsOfURL:pictureURL];
+                    
+                    [user setObject:facebookPhoto forKey:@"facebookPhoto"];
+                    [user saveInBackground];
+                    [NSURLConnection sendAsynchronousRequest:urlRequest
+                                                       queue:[NSOperationQueue mainQueue]
+                                           completionHandler:
+                     ^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                         if (connectionError == nil && data != nil) {
+                             // Set the image in the imageView
+                             // ...
+                         }
+                     }];
+                    
+                    
+                }
+                
+            }];
         }
     }];
 }
@@ -130,109 +210,6 @@
     [self processFieldEntries];
     
 }
-
-// when I press the login with Facebook Button these actions will take place
-- (IBAction)loginWithFaceBookButtonPressed:(id)sender {
-    // Set permissions required from the facebook user account
-    NSArray *permissionsArray = @[ @"email", @"public_profile", @"user_location"];
-    
-    // set up activityView
-    self.activityViewVisible = YES;
-    
-    // logging wiht PFUser using Facebook (this is a parse API to use Facebook)
-    // Login PFUser using Facebook
-    [PFFacebookUtils logInInBackgroundWithReadPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
-        if (!user) {
-            // Hid the activity view
-            self.activityViewVisible = NO;
-            NSLog(@"Uh oh. The user cancelled the Facebook login.");
-        } else if (user.isNew) {
-            NSLog(@"User signed up and logged in through Facebook!");
-        } else {
-            NSLog(@"User logged in through Facebook!");
-
-
-        }
-        
-        FBSDKAccessToken *accessToken = [[FBSDKAccessToken alloc]init];
-        
-        // Log In (create/update currentUser) with FBSDKAccessToken
-        [PFFacebookUtils logInInBackgroundWithAccessToken:accessToken block:^(PFUser *user, NSError *error) {
-            if (!user) {
-                NSLog(@"Uh oh. There was an error logging in.");
-            } else {
-                NSLog(@"User logged in through Facebook!");
-            }
-        }];
-        
-
-        
-        
-        // If the user is not linked with the parse user link the parse user with Facebook
-        if (![PFFacebookUtils isLinkedWithUser:user]) {
-            [PFFacebookUtils linkUserInBackground:user withReadPermissions:nil block:^(BOOL succeeded, NSError *error) {
-                if (succeeded) {
-                    NSLog(@"Woohoo, user is linked with Facebook!");
-                }
-            }];
-        }
-        
-        
-    }];
-    
-    
-    // Request new Publish Permissions
-    [PFFacebookUtils logInInBackgroundWithPublishPermissions:@[ @"publish_actions" ] block:^(PFUser *user, NSError *error) {
-        if (!user) {
-            NSLog(@"Uh oh. The user cancelled the Facebook login.");
-        } else {
-            NSLog(@"User now has publish permissions!");
-            FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]initWithGraphPath:@"me" parameters:nil];
-            [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-                if (!error) {
-                    // get the dictionary with the user's Facebook data
-                    NSDictionary *userData = (NSDictionary *)result;
-                    
-                    NSString *facebookID = userData[@"id"];
-                    NSString *name = userData[@"first_name"];
-                    NSString *location = userData[@"location"][@"name"];
-                    NSString *gender = userData[@"gender"];
-                    NSString *birthday = userData[@"birthday"];
-                    NSString *relationship = userData[@"relationship_status"];
-                    [PFUser currentUser][@"name"] = userData[@"first_name"];
-                    
-                    
-                    // URL should point to https://graph.facebook.com/{facebookId}/picture?type=large&return_ssl_resources=1
-                    NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
-                    
-
-                    
-                    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:pictureURL];
-                    
-                    [NSURLConnection sendAsynchronousRequest:urlRequest
-                                                       queue:[NSOperationQueue mainQueue]
-                                           completionHandler:
-                     ^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                         if (connectionError == nil && data != nil) {
-                             // Set the image in the imageView
-                             // ...
-                         }
-                     }];
-                }
-
-            }];
-        }
-    }];
-    
-    
-
-}
-
-
-- (IBAction)loginWithFacebookButtonPressed:(id)sender {
-  }
-    
-
 
 
 // get the username text, store it in the app delegate for now
@@ -357,6 +334,8 @@
                                           completion:nil];
     
 }
+
+
 
 // The app delegate can implement the required delegate method to display the main view controller
 - (void) loginViewControllerDidLogin:(LoginViewController *)controller {

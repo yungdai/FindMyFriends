@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14E17e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -118,8 +118,8 @@
                                     <action selector="loginWithFaceBookButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y6B-hB-Wib"/>
                                 </connections>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.39999999999999963" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SZ7-iA-64C">
-                                <rect key="frame" x="16" y="419" width="568" height="42"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.39999999999999963" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SZ7-iA-64C">
+                                <rect key="frame" x="16" y="405" width="568" height="42"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="33"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -128,6 +128,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="eUB-bb-JUq" firstAttribute="trailing" secondItem="nFD-ND-koA" secondAttribute="trailing" id="0DU-A8-rR3"/>
+                            <constraint firstItem="eUB-bb-JUq" firstAttribute="top" secondItem="SZ7-iA-64C" secondAttribute="bottom" constant="33" id="0pM-q6-D9h"/>
                             <constraint firstItem="7cw-T8-VN3" firstAttribute="top" secondItem="DlY-a2-NVB" secondAttribute="bottom" constant="8" symbolic="YES" id="2US-gp-7Dv"/>
                             <constraint firstAttribute="trailing" secondItem="v1q-RY-Nn6" secondAttribute="trailing" id="8B5-mz-ZrZ"/>
                             <constraint firstItem="4rY-eN-okt" firstAttribute="trailing" secondItem="nFD-ND-koA" secondAttribute="trailing" id="8Z6-LQ-jp9"/>
@@ -136,10 +137,10 @@
                             <constraint firstItem="v1q-RY-Nn6" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="E0I-C9-eaw"/>
                             <constraint firstItem="v1q-RY-Nn6" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="EFj-PP-C6G"/>
                             <constraint firstItem="4rY-eN-okt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="HuQ-4V-Efd"/>
+                            <constraint firstItem="SZ7-iA-64C" firstAttribute="top" secondItem="nFD-ND-koA" secondAttribute="bottom" constant="29" id="OLZ-JK-fM0"/>
                             <constraint firstItem="4rY-eN-okt" firstAttribute="top" secondItem="7cw-T8-VN3" secondAttribute="bottom" constant="8" symbolic="YES" id="Qa6-oq-wdK"/>
                             <constraint firstItem="nFD-ND-koA" firstAttribute="centerX" secondItem="v1q-RY-Nn6" secondAttribute="centerX" id="T4K-dj-Nlj"/>
                             <constraint firstItem="v1q-RY-Nn6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Tiq-63-J0z"/>
-                            <constraint firstItem="SZ7-iA-64C" firstAttribute="top" secondItem="nFD-ND-koA" secondAttribute="bottom" constant="43" id="VFf-Ye-zy7"/>
                             <constraint firstItem="SZ7-iA-64C" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="bE5-ZI-lhj"/>
                             <constraint firstItem="DlY-a2-NVB" firstAttribute="trailing" secondItem="7cw-T8-VN3" secondAttribute="trailing" id="bmd-gK-GgR"/>
                             <constraint firstItem="eUB-bb-JUq" firstAttribute="leading" secondItem="nFD-ND-koA" secondAttribute="leading" id="dRz-IB-zuh"/>
