@@ -8,6 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+
+// required frameworks for this view
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
+
+@class WallViewController;
+
+@protocol WallViewControllerDelegate <NSObject>
+
+- (void)wallViewControllerWantsToPresentSettings:(WallViewController *)controller;
+
+@end
+
 @interface WallViewController : UIViewController
+
+
+@property (weak, nonatomic) id<WallViewControllerDelegate> delegate;
 
 @end

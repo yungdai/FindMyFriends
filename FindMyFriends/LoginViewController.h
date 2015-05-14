@@ -35,9 +35,8 @@
 @property (strong, nonatomic) IBOutlet UITextField *passwordField;
 @property (strong, nonatomic) IBOutlet UIButton *loginButton;
 @property (strong, nonatomic) IBOutlet UIView *faceBookLogin;
+@property (strong, nonatomic) IBOutlet UIImageView *userImage;
 
-- (void)loginWithFacebookButtonPressed;
 
-- (void)facebookPublishPermissions;
 
 @end

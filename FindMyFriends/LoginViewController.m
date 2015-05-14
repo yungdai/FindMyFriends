@@ -11,19 +11,21 @@
 // adding in the NewUser and ActivityView  to be used
 #import "NewUserViewController.h"
 #import "ActivityView.h"
+#import "WallViewController.h"
 
-// Facebook API required API's
+
+// Facebook Framework's required API's
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
-// Parse API inheritence
+// Parse Framework's API inheritence
 #import <Parse/Parse.h>
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 
 @interface LoginViewController ()
 
 // declare my delegates
-<UITextFieldDelegate, NewUserViewControllerDelegate, LoginViewControllerDelegate>
+<UITextFieldDelegate, NewUserViewControllerDelegate, LoginViewControllerDelegate, WallViewControllerDelegate>
 
 // declare properties for the implimentation
 
@@ -52,13 +54,18 @@
     
     // Facebook API setup
     FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc]init];
-
-    if ([FBSDKAccessToken currentAccessToken]) {
-        // User is logged in, do work such as go to next view controller.
-    }
     
-    //  requeting and setting the user data from Facebook
+//    if ([FBSDKAccessToken currentAccessToken]) {
+//        [self presentWallViewControllerAnimated:YES];
+//    } else {
+//        [self _loadData];
+//        
+//    }
+    
     [self _loadData];
+    
+    //  requesting and setting the user data from Facebook and sending the data to Parse
+
     
 
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
@@ -72,10 +79,11 @@
 
 - (void)_loadData {
     // Set permissions required from the facebook user account
-    NSArray *permissionsArray = @[ @"email", @"public_profile", @"user_location"];
+    NSArray *permissionsArray = @[ @"email", @"public_profile", @"user_location", @"access_token"];
     
     // set up activityView
     self.activityViewVisible = YES;
+
     
     // logging wiht PFUser using Facebook (this is a parse API to use Facebook)
     // Login PFUser using Facebook
@@ -84,6 +92,7 @@
             // Hid the activity view
             self.activityViewVisible = NO;
             NSLog(@"Uh oh. The user cancelled the Facebook login.");
+            
         } else if (user.isNew) {
             NSLog(@"User signed up and logged in through Facebook!");
         } else {
@@ -92,16 +101,10 @@
             
         }
         
-        FBSDKAccessToken *accessToken = [[FBSDKAccessToken alloc]init];
+
         
         // Log In (create/update currentUser) with FBSDKAccessToken
-        [PFFacebookUtils logInInBackgroundWithAccessToken:accessToken block:^(PFUser *user, NSError *error) {
-            if (!user) {
-                NSLog(@"Uh oh. There was an error logging in.");
-            } else {
-                NSLog(@"User logged in through Facebook!");
-            }
-        }];
+   
         
         
         
@@ -113,11 +116,24 @@
                     NSLog(@"Woohoo, user is linked with Facebook!");
                 }
             }];
+        } else {
+            
+            
         }
         
         
     }];
     
+    FBSDKAccessToken *accessToken = [FBSDKAccessToken currentAccessToken];
+    [PFFacebookUtils logInInBackgroundWithAccessToken:accessToken block:^(PFUser *user, NSError *error) {
+        if (!user) {
+            
+            NSLog(@"Uh oh. There was an error logging in.");
+        } else {
+            NSLog(@"User logged in through Facebook!");
+            [user setObject:accessToken forKey:@"currentAccessToken"];
+        }
+    }];
     
     // Request new Publish Permissions
     [PFFacebookUtils logInInBackgroundWithPublishPermissions:@[ @"publish_actions" ] block:^(PFUser *user, NSError *error) {
@@ -140,6 +156,19 @@
                     NSString *timezone = userData[@"timezone"];
                     NSString *locale = userData[@"locale"];
                     
+                    // get the facebook access token
+                    NSString *facebookAccessToken = [FBSDKAccessToken currentAccessToken].tokenString;
+                    // NSUserDefault setting of the facebookAccessToken
+                    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                    
+                    if ([[userDefaults objectForKey:@"facebookeAccessToken"] isEqualToString:facebookAccessToken]) {
+                        // set my user session to be active because the accessToken matches
+
+                        
+                    } else {
+                        // the stored NSUserDefault token doesn't match with my current to token.  I will store my current tokent back into NSUserDefaults
+                        [userDefaults setObject:facebookAccessToken forKey:@"faceBookAccessToken"];
+                    }
                     
                     [user setObject:first_name forKey:@"first_name"];
                     [user setObject:last_name forKey:@"last_name"];
@@ -148,23 +177,28 @@
                     [user setObject:name forKey:@"name"];
                     [user setObject:timezone forKey:@"timezone"];
                     [user setObject:locale forKey:@"locale"];
-                    
-                    
+                    [user setObject:facebookAccessToken forKey:@"facebookAccessToken"];
+
                     
                     
                     // URL should point to https://graph.facebook.com/{facebookId}/picture?type=large&return_ssl_resources=1
-                    
-                    
-                    // Get an image from the URL below
-                    //UIImage *image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.objectgraph.com/images/og_logo.png"]]];
-                    
-                    
+                    // ask Facebook Graph API for the picture
                     // set up the UIImage variable for the facebook image
                     NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
                     
+                    
+                    // take the request and turn it into NSURLRequest
                     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:pictureURL];
+                    
+                    // the the request and store it as NSData
                     NSData *facebookPhoto = [[NSData alloc]initWithContentsOfURL:pictureURL];
                     
+                    
+                    // set the userImage UIImage on my storyboard to that data
+                    self.userImage.image = [UIImage imageWithData:facebookPhoto];
+                    
+                    
+                    // send my facebook photo to parse
                     [user setObject:facebookPhoto forKey:@"facebookPhoto"];
                     [user saveInBackground];
                     [NSURLConnection sendAsynchronousRequest:urlRequest
@@ -199,6 +233,7 @@
 
 - (void)_logOut {
     [PFUser logOut]; // log out
+    NSLog(@"User has logged out");
 }
 
 // when I press the login button these actions will take place
@@ -337,13 +372,6 @@
 
 
 
-// The app delegate can implement the required delegate method to display the main view controller
-- (void) loginViewControllerDidLogin:(LoginViewController *)controller {
-    // private method to display the main view controller
-//    [self presentWallViewControllerAnimated: YES];
-}
-
-
 
 // this method dismisses the keyboard
 - (void)dismissKeyboard {
@@ -382,6 +410,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)presentWallViewControllerAnimated:(BOOL)animated {
+    WallViewController *wallViewController = [[WallViewController alloc] initWithNibName:nil bundle:nil];
+    wallViewController.delegate = self;
+    [self.navigationController setViewControllers:@[ wallViewController ] animated:animated];
 }
 
 /*

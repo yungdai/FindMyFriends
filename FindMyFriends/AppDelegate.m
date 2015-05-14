@@ -22,7 +22,7 @@
 #import "WallViewController.h"
 
 
-@interface AppDelegate ()<LoginViewControllerDelegate>
+@interface AppDelegate ()<LoginViewControllerDelegate, WallViewControllerDelegate>
 
 @end
 
@@ -38,11 +38,31 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Parse setApplicationId:@"WTIpjvmocLnKmjegvp4Z1CHNnbP0IMKwjvJoUPqH" clientKey:@"CfIcbjiWafImIzBiiHBsK4BFGLaEgyd4QWFoPrPI"];
+    [PFUser enableRevocableSessionInBackground];
+    
+    // get the facebook access toke
+    
+    if ([PFUser currentUser]) {
+        
+        // present the wall viewcontroller right away if you are already logged in
+        [self presentWallViewControllerAnimated:NO];
+        
+    } else {
+        
+        // if not then you will be presented with the login page
+        [self presentLoginViewController];
+    }
+    
+    
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
+    
+    
     
     // Override point for customization after application launch.
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
+    
+    
 }
 
 - (BOOL)application:(UIApplication *)application
@@ -58,7 +78,7 @@
 
 // after you have logged in preset the WallViewController
 - (void)loginViewControllerDidLogin:(LoginViewController *)controller {
-//    [self presentWallViewControllerAnimated:YES];
+    [self presentWallViewControllerAnimated:YES];
 }
 
 - (void)presentLoginViewController {
@@ -68,6 +88,12 @@
     [self.navigationController setViewControllers:@[ viewController ] animated:NO];
 }
 
+
+- (void)presentWallViewControllerAnimated:(BOOL)animated {
+    WallViewController *wallViewController = [[WallViewController alloc] init];
+    wallViewController.delegate = self;
+    [self.navigationController setViewControllers:@[ wallViewController ] animated:animated];
+}
 
 //- (void)settingsViewControllerDidLogout:(SettingsViewController *)controller {
 //    [controller dismissViewControllerAnimated:YES completion:nil];

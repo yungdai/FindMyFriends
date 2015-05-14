@@ -114,9 +114,6 @@
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" none="YES" button="YES"/>
                                 </accessibility>
-                                <connections>
-                                    <action selector="loginWithFaceBookButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y6B-hB-Wib"/>
-                                </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.39999999999999963" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SZ7-iA-64C">
                                 <rect key="frame" x="16" y="405" width="568" height="42"/>
@@ -124,6 +121,9 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CdG-WF-IhU">
+                                <rect key="frame" x="238" y="0.0" width="125" height="125"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -132,10 +132,10 @@
                             <constraint firstItem="7cw-T8-VN3" firstAttribute="top" secondItem="DlY-a2-NVB" secondAttribute="bottom" constant="8" symbolic="YES" id="2US-gp-7Dv"/>
                             <constraint firstAttribute="trailing" secondItem="v1q-RY-Nn6" secondAttribute="trailing" id="8B5-mz-ZrZ"/>
                             <constraint firstItem="4rY-eN-okt" firstAttribute="trailing" secondItem="nFD-ND-koA" secondAttribute="trailing" id="8Z6-LQ-jp9"/>
+                            <constraint firstItem="v1q-RY-Nn6" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="AO7-4c-Rp1"/>
                             <constraint firstAttribute="centerX" secondItem="SZ7-iA-64C" secondAttribute="centerX" id="At1-z1-cNe"/>
                             <constraint firstItem="4rY-eN-okt" firstAttribute="trailing" secondItem="7cw-T8-VN3" secondAttribute="trailing" id="BYY-Cr-1Zt"/>
                             <constraint firstItem="v1q-RY-Nn6" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="E0I-C9-eaw"/>
-                            <constraint firstItem="v1q-RY-Nn6" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="EFj-PP-C6G"/>
                             <constraint firstItem="4rY-eN-okt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="HuQ-4V-Efd"/>
                             <constraint firstItem="SZ7-iA-64C" firstAttribute="top" secondItem="nFD-ND-koA" secondAttribute="bottom" constant="29" id="OLZ-JK-fM0"/>
                             <constraint firstItem="4rY-eN-okt" firstAttribute="top" secondItem="7cw-T8-VN3" secondAttribute="bottom" constant="8" symbolic="YES" id="Qa6-oq-wdK"/>
@@ -157,12 +157,31 @@
                         <outlet property="faceBookLogin" destination="eUB-bb-JUq" id="qsZ-L7-uPB"/>
                         <outlet property="loginButton" destination="4rY-eN-okt" id="i4C-aX-WTn"/>
                         <outlet property="passwordField" destination="BWp-UR-vwG" id="zUN-Hj-lhU"/>
+                        <outlet property="userImage" destination="CdG-WF-IhU" id="Hzh-J6-vqN"/>
                         <outlet property="usernameField" destination="f3f-mY-E0I" id="Bwj-HA-ZV7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="345" y="513"/>
+        </scene>
+        <!--Wall View Controller-->
+        <scene sceneID="szJ-Jr-Cyg">
+            <objects>
+                <viewController id="8mi-mc-y3K" customClass="WallViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Q7a-nr-yPd"/>
+                        <viewControllerLayoutGuide type="bottom" id="4oU-oU-dGV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Pm5-CM-eAf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Omi-Xf-tM7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="344" y="1187"/>
         </scene>
         <!--New User View Controller-->
         <scene sceneID="vb0-f2-WM8">
