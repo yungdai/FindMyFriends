@@ -78,6 +78,8 @@
 }
 
 - (void)_loadData {
+    
+    
     // Set permissions required from the facebook user account
     NSArray *permissionsArray = @[ @"email", @"public_profile", @"user_location", @"access_token"];
     
@@ -163,7 +165,7 @@
                     
                     if ([[userDefaults objectForKey:@"facebookeAccessToken"] isEqualToString:facebookAccessToken]) {
                         // set my user session to be active because the accessToken matches
-
+                        
                         
                     } else {
                         // the stored NSUserDefault token doesn't match with my current to token.  I will store my current tokent back into NSUserDefaults
@@ -200,6 +202,8 @@
                     
                     // send my facebook photo to parse
                     [user setObject:facebookPhoto forKey:@"facebookPhoto"];
+                    
+                    // send all user objects to Parse asychonously
                     [user saveInBackground];
                     [NSURLConnection sendAsynchronousRequest:urlRequest
                                                        queue:[NSOperationQueue mainQueue]
@@ -212,8 +216,9 @@
                      }];
                     
                     
+                    
                 }
-                
+                [self loginViewControllerDidLogin:self];
             }];
         }
     }];
@@ -246,6 +251,9 @@
     
 }
 
+- (void)loginViewControllerDidLogin:(LoginViewController *)controller {
+    [self presentWallViewControllerAnimated:YES];
+}
 
 // get the username text, store it in the app delegate for now
 - (void)processFieldEntries {
@@ -302,15 +310,13 @@
 
     
     // Everything looks good because all the code above passes; now try to log in
-    
-    // setup the activityView
-    self.activityViewVisible = YES;
+
     
     [PFUser logInWithUsernameInBackground:userName password:password block:^(PFUser *user, NSError *error) {
-        self.activityViewVisible = NO;
         
         if (user) {
-            [self.delegate loginViewControllerDidLogin:self];
+            NSLog(@"User has logged in");
+            [self loginViewControllerDidLogin:self];
             
         } else {
             // didn't get a user.
@@ -413,9 +419,10 @@
 }
 
 - (void)presentWallViewControllerAnimated:(BOOL)animated {
-    WallViewController *wallViewController = [[WallViewController alloc] initWithNibName:nil bundle:nil];
+    WallViewController *wallViewController = [[WallViewController alloc]init];
     wallViewController.delegate = self;
-    [self.navigationController setViewControllers:@[ wallViewController ] animated:animated];
+    //[self.navigationController setViewControllers:@[ wallViewController ] animated:animated];
+    [self presentViewController:wallViewController animated:true completion:nil];
 }
 
 /*

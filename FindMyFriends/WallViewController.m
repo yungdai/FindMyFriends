@@ -14,6 +14,15 @@
 
 @implementation WallViewController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        NSLog(@"initalised");
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

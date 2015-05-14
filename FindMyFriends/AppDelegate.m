@@ -51,12 +51,12 @@
         
         // if not then you will be presented with the login page
         [self presentLoginViewController];
+
     }
     
+
     
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
-    
-    
     
     // Override point for customization after application launch.
     return [[FBSDKApplicationDelegate sharedInstance] application:application
