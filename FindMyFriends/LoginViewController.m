@@ -55,12 +55,13 @@
     // Facebook API setup
     FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc]init];
     
-//    if ([FBSDKAccessToken currentAccessToken]) {
-//        [self presentWallViewControllerAnimated:YES];
-//    } else {
-//        [self _loadData];
-//        
-//    }
+    if ([FBSDKAccessToken currentAccessToken]) {
+        // need to tell the API that I need view did load
+
+    } else {
+        [self _loadData];
+        
+    }
     
     [self _loadData];
     
@@ -226,7 +227,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     if ([PFUser currentUser] && // Check if user is cached
         [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) { // Check if user is linked to Facebook
-
+            [self presentWallViewControllerAnimated:YES];
         
 //        LoginViewController *controller = [[LoginViewController alloc] init];
 //        logInController.fields = (PFLogInFieldsUsernameAndPassword
