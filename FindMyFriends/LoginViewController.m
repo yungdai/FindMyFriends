@@ -26,14 +26,6 @@
 // declare my delegates
 <UITextFieldDelegate, NewUserViewControllerDelegate, LoginViewControllerDelegate, WallViewControllerDelegate>
 
-// declare properties for the implimentation
-
-// declare properties for a view that I show programatically
-// variable to contain if I can or cannot see the activityView
-@property (assign, nonatomic) BOOL activityViewVisible;
-// the actual UI View for activityView property
-@property (strong, nonatomic) UIView *activityView;
-
 
 
 @end
@@ -41,50 +33,6 @@
 
 
 @implementation LoginViewController
-
-
-
-
-// method to deallocate the NSNotificaiton Controller
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-
-    // setup the NSUserDefault
-    NSUserDefaults *userDefaults = [[NSUserDefaults standardUserDefaults]init];
-    [self returnUserDefaults];
-    
-    // check the userDefaults with Parse
-    
-    NSLog(@"Login View Controller");
-    
-
-    if ([PFUser currentUser] && // Check if user is cached
-        [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) { // Check if user is linked to Facebook
-        [self presentWallViewControllerAnimated:YES];
-        
-    }
-    // if there is already a Facebook AccessToken for this app do this
-
-    if ([FBSDKAccessToken currentAccessToken]) {
-        // need to tell the API that I need viewWillAppear
-        [self presentWallViewControllerAnimated:YES];
-    } else {
-        
-        [self _loadData];
-        
-    }
-    
-//    [self _loadData];
-
-
-
-}
 
 - (void)returnUserDefaults {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -98,8 +46,7 @@
     
 }
 
-- (void)_loadData {
-    
+- (void)loadData {
     
     // Set permissions required from the facebook user account
     NSArray *permissionsArray = @[ @"email", @"public_profile", @"user_location", @"access_token"];
@@ -109,8 +56,7 @@
     // Login PFUser using Facebook
     [PFFacebookUtils logInInBackgroundWithReadPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
         if (!user) {
-            // Hid the activity view
-            self.activityViewVisible = NO;
+
             NSLog(@"Uh oh. The user cancelled the Facebook login.");
             
         } else if (user.isNew) {
@@ -212,7 +158,7 @@
                     NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
                     
                     // the the request and store it as NSData
-                    NSData *facebookPhoto = [[NSData alloc]initWithContentsOfURL:pictureURL];
+                    NSData *facebookPhoto = [[NSData alloc] initWithContentsOfURL:pictureURL];
                     
                     
                     // set the userImage UIImage on my storyboard to that data
@@ -233,17 +179,35 @@
     }];
 }
 - (void)viewWillAppear:(BOOL)animated {
-    if ([PFUser currentUser] && // Check if user is cached
-        [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) { // Check if user is linked to Facebook
-            [self presentWallViewControllerAnimated:YES];
-    
-    }
+    [super viewWillAppear:animated];
+   
 }
 
-- (void)_logOut {
-    [PFUser logOut]; // log out
-    NSLog(@"User has logged out");
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [self returnUserDefaults];
+    
+    if ([PFUser currentUser] && // Check if user is cached
+        
+        [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) { // Check if user is linked to Facebook
+        NSLog(@"User is cached!");
+        // if the user is linked with facebook then show the view!
+        [self presentWallViewControllerAnimated:YES];
+        
+    } else if ([FBSDKAccessToken currentAccessToken]) {
+        // need to tell the API that I need viewWillAppear
+        [self presentWallViewControllerAnimated:YES];
+    } else {
+        
+        [self loadData];
+        
+    }
+
 }
+
+
 
 // when I press the login button these actions will take place
 - (IBAction)loginButtonPressed:(id)sender {
@@ -257,7 +221,7 @@
 
 - (void)loginViewControllerDidLogin:(LoginViewController *)controller {
     
-    [self presentWallViewControllerAnimated:YES];
+    //[self presentWallViewControllerAnimated:YES];
 }
 
 // get the username text, store it in the app delegate for now
@@ -341,11 +305,11 @@
                 // the usename or password is probably wrong.
                 alertTitle = @"Couldn't log in:\nThe username or password were wrong.";
             }
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:alertTitle
-                                                               message:nil
-                                                              delegate:self
-                                                     cancelButtonTitle:nil
-                                                     otherButtonTitles:@"OK", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertTitle
+                                                                message:nil
+                                                               delegate:self
+                                                      cancelButtonTitle:nil
+                                                      otherButtonTitles:@"OK", nil];
             [alertView show];
             
             // Bring the keyboard back up, because they'll probably need to change something.
@@ -369,23 +333,21 @@
 
 // When the app delegate sets up the LoginViewController it can set itself up as the delegate for that view controller.
 - (void)presentLoginViewController:(NewUserViewController *)controller {
-    LoginViewController *viewController = [[LoginViewController alloc]initWithNibName:nil bundle:nil];
-    viewController.delegate = self;
-    [self.navigationController setViewControllers:@[ viewController ] animated:NO];
-    
+    LoginViewController *loginViewController = [[LoginViewController alloc] init];
+    [self presentViewController:loginViewController animated:YES completion:nil];
 }
 
 
 
 // When the LoginViewController instantiates and presents the NewUserViewController, it sets itself up as the delegate so it can be notified when a user signs up:
 - (void)presentNewUserViewController {
-    NewUserViewController *viewController  = [[NewUserViewController alloc]initWithNibName:nil
-                                                                                    bundle:nil];
-    
-    viewController.delegate = self;
-    [self.navigationController presentViewController:viewController
-                                            animated:YES
-                                          completion:nil];
+//    NewUserViewController *viewController  = [[NewUserViewController alloc]initWithNibName:nil
+//                                                                                    bundle:nil];
+//    
+//    viewController.delegate = self;
+//    [self.navigationController presentViewController:viewController
+//                                            animated:YES
+//                                          completion:nil];
     
 }
 
@@ -405,20 +367,24 @@
 }
 
 - (void)presentWallViewControllerAnimated:(BOOL)animated {
-    WallViewController *wallViewController = [[WallViewController alloc]init];
-    wallViewController.delegate = self;
-    //[self.navigationController setViewControllers:@[ wallViewController ] animated:animated];
-    [self presentViewController:wallViewController animated:true completion:nil];
+    NSLog(@"Ah yyyeeeah, I gots the call");
+    WallViewController *wallViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"WallViewController"];
+    [self presentViewController:wallViewController animated:YES completion:nil];
 }
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+//// In a storyboard-based application, you will often want to do a little preparation before navigation
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    [segue destinationViewController];
+//
+//}
+
+
+- (void)logOut {
+    [PFUser logOut]; // log out
+    NSLog(@"User has logged out");
 }
-*/
 
 @end

@@ -39,21 +39,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Parse setApplicationId:@"WTIpjvmocLnKmjegvp4Z1CHNnbP0IMKwjvJoUPqH" clientKey:@"CfIcbjiWafImIzBiiHBsK4BFGLaEgyd4QWFoPrPI"];
-    PFUser *user = [PFUser currentUser];
-    
-    // Check for PFUser is current user
-    if ([PFUser currentUser]) {
-        
-        // present the wall viewcontroller right away if you are already logged in
-        [self presentWallViewControllerAnimated:NO];
-        
-    } else {
-        
-        // if not then you will be presented with the login page
-        [self presentLoginViewController];
-        
-    }
-    
     
     [FBSDKLoginButton class];
     
@@ -75,11 +60,17 @@
     return YES;
 }
 
-- (void)checkUserDefaults {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *username = [defaults objectForKey:@"username"];
-    NSString *objectID  = [defaults objectForKey:@"objectID"];
+- (BOOL)checkUserDefaults {
+//    BOOL hasRequiredElements = NO;
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    NSString *username = [defaults objectForKey:@"username"];
+//    NSString *objectID  = [defaults objectForKey:@"objectID"];
+//    if (username && objectID) {
+//        hasRequiredElements = YES;
+//    }
+//    return hasRequiredElements;
     
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"username"] && [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
 }
 
 - (BOOL)application:(UIApplication *)application
@@ -92,25 +83,25 @@
                                                        annotation:annotation];
 }
 
-
-// after you have logged in preset the WallViewController
-- (void)loginViewControllerDidLogin:(LoginViewController *)controller {
-    [self presentWallViewControllerAnimated:YES];
-}
-
-- (void)presentLoginViewController {
-    // Go to the welcome screen and have them log in or create an account.
-    LoginViewController *viewController = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
-    viewController.delegate = self;
-    [self.navigationController setViewControllers:@[ viewController ] animated:NO];
-}
-
-
-- (void)presentWallViewControllerAnimated:(BOOL)animated {
-    WallViewController *wallViewController = [[WallViewController alloc] init];
-    
-    
-}
+//
+//// after you have logged in preset the WallViewController
+//- (void)loginViewControllerDidLogin:(LoginViewController *)controller {
+//    [self presentWallViewControllerAnimated:YES];
+//}
+//
+//- (void)presentLoginViewController {
+//    // Go to the welcome screen and have them log in or create an account.
+//    LoginViewController *viewController = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
+//    viewController.delegate = self;
+//    [self.navigationController setViewControllers:@[ viewController ] animated:NO];
+//}
+//
+//
+//- (void)presentWallViewControllerAnimated:(BOOL)animated {
+//    WallViewController *wallViewController = [[WallViewController alloc] init];
+//    
+//    
+//}
 
 //- (void)settingsViewControllerDidLogout:(SettingsViewController *)controller {
 //    [controller dismissViewControllerAnimated:YES completion:nil];

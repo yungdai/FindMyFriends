@@ -60,9 +60,8 @@
 
 - (void)presentLoginViewController {
     // Go to the welcome screen and have them log in or create an account.
-    LoginViewController *viewController = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
-    viewController.delegate = self;
-    [self.navigationController setViewControllers:@[ viewController ] animated:NO];
+    LoginViewController *loginViewController = [[LoginViewController alloc] init];
+    [self presentViewController:loginViewController animated:YES completion:nil];
 }
 
 

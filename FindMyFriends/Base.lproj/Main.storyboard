@@ -20,17 +20,17 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="friendship-day-gifts-ideas-20121" translatesAutoresizingMaskIntoConstraints="NO" id="v1q-RY-Nn6">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
-                            <view alpha="0.74999999999999978" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DlY-a2-NVB" userLabel="Username">
-                                <rect key="frame" x="16" y="124" width="568" height="57"/>
+                            <view alpha="0.74999999999999978" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DlY-a2-NVB" userLabel="Username">
+                                <rect key="frame" x="16" y="126" width="568" height="55"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="icon_user" translatesAutoresizingMaskIntoConstraints="NO" id="RrK-ht-lIr">
-                                        <rect key="frame" x="8" y="20" width="20" height="17"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_user" translatesAutoresizingMaskIntoConstraints="NO" id="RrK-ht-lIr">
+                                        <rect key="frame" x="8" y="20" width="20" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="Hzt-XR-PcN"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f3f-mY-E0I">
-                                        <rect key="frame" x="36" y="14" width="517" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f3f-mY-E0I">
+                                        <rect key="frame" x="36" y="14" width="517" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -98,6 +98,7 @@
                                 <rect key="frame" x="16" y="254" width="568" height="57"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="57" id="iqc-ZF-6pf"/>
                                     <constraint firstAttribute="height" constant="57" id="qAu-Ez-B2q"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
@@ -108,8 +109,8 @@
                                     <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gox-Ct-3em"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" restorationIdentifier="FacbookLogin" translatesAutoresizingMaskIntoConstraints="NO" id="eUB-bb-JUq" customClass="FBSDKLoginButton">
-                                <rect key="frame" x="16" y="480" width="568" height="57"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="FacbookLogin" translatesAutoresizingMaskIntoConstraints="NO" id="eUB-bb-JUq" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="16" y="480" width="568" height="0.0"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" none="YES" button="YES"/>
@@ -129,9 +130,6 @@
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="8mi-mc-y3K" kind="presentation" id="KSY-BN-7Jc"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -168,16 +166,17 @@
                         <outlet property="passwordField" destination="BWp-UR-vwG" id="zUN-Hj-lhU"/>
                         <outlet property="userImage" destination="CdG-WF-IhU" id="Hzh-J6-vqN"/>
                         <outlet property="usernameField" destination="f3f-mY-E0I" id="Bwj-HA-ZV7"/>
+                        <segue destination="8mi-mc-y3K" kind="presentation" id="Mad-kX-zkh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="345" y="513"/>
+            <point key="canvasLocation" x="179" y="513"/>
         </scene>
         <!--Wall View Controller-->
         <scene sceneID="szJ-Jr-Cyg">
             <objects>
-                <viewController id="8mi-mc-y3K" customClass="WallViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WallViewController" id="8mi-mc-y3K" customClass="WallViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Q7a-nr-yPd"/>
                         <viewControllerLayoutGuide type="bottom" id="4oU-oU-dGV"/>
@@ -186,8 +185,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gim-gV-LVX">
-                                <rect key="frame" x="5" y="0.0" width="84" height="49"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gim-gV-LVX">
+                                <rect key="frame" x="5" y="19" width="84" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="84" id="jL9-Zm-Tc4"/>
                                 </constraints>
@@ -201,8 +200,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="gim-gV-LVX" firstAttribute="top" secondItem="Q7a-nr-yPd" secondAttribute="bottom" constant="-1" id="Nbr-cT-qsx"/>
                             <constraint firstItem="gim-gV-LVX" firstAttribute="leading" secondItem="Pm5-CM-eAf" secondAttribute="leadingMargin" constant="-11" id="ffH-6b-dVs"/>
-                            <constraint firstItem="4oU-oU-dGV" firstAttribute="top" secondItem="gim-gV-LVX" secondAttribute="bottom" constant="551" id="sdx-1D-eWg"/>
                         </constraints>
                     </view>
                     <connections>
@@ -211,7 +210,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Omi-Xf-tM7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="344" y="1187"/>
+            <point key="canvasLocation" x="179" y="1351"/>
         </scene>
         <!--New User View Controller-->
         <scene sceneID="vb0-f2-WM8">
@@ -294,17 +293,17 @@
                                     <segue destination="BYZ-38-t0r" kind="show" id="nGe-Cw-Ea4"/>
                                 </connections>
                             </button>
-                            <view alpha="0.75" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W6V-Lf-Ts9" userLabel="Password Confirmation">
-                                <rect key="frame" x="16" y="290" width="568" height="57"/>
+                            <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W6V-Lf-Ts9" userLabel="Password Confirmation">
+                                <rect key="frame" x="16" y="290" width="568" height="51"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="icon_lock" translatesAutoresizingMaskIntoConstraints="NO" id="dQ3-ce-RjW">
-                                        <rect key="frame" x="8" y="20" width="20" height="17"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_lock" translatesAutoresizingMaskIntoConstraints="NO" id="dQ3-ce-RjW">
+                                        <rect key="frame" x="8" y="17" width="20" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="w0P-9x-8jM"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password Confirmation" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tFw-Pr-1BG">
-                                        <rect key="frame" x="36" y="14" width="524" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password Confirmation" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tFw-Pr-1BG">
+                                        <rect key="frame" x="36" y="14" width="524" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
@@ -319,8 +318,8 @@
                                     <constraint firstAttribute="bottom" secondItem="tFw-Pr-1BG" secondAttribute="bottom" constant="13" id="xvL-oJ-CyB"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" alpha="0.75" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="di9-XW-Tkr">
-                                <rect key="frame" x="16" y="383" width="568" height="57"/>
+                            <button opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="di9-XW-Tkr">
+                                <rect key="frame" x="16" y="377" width="568" height="57"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="57" id="PbR-JG-pwM"/>
@@ -367,7 +366,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CII-4C-7n3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1064" y="513"/>
+            <point key="canvasLocation" x="1145" y="261"/>
         </scene>
     </scenes>
     <resources>
