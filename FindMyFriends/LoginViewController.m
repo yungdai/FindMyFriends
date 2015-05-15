@@ -52,23 +52,29 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    // Facebook API setup
+    // Facebook Button API setup
     FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc]init];
-    
+    if ([PFUser currentUser] && // Check if user is cached
+        [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) { // Check if user is linked to Facebook
+        [self presentWallViewControllerAnimated:YES];
+        
+    }
+    // if there is already a Facebook AccessToken for this app do this
     if ([FBSDKAccessToken currentAccessToken]) {
-        // need to tell the API that I need view did load
-
+        // need to tell the API that I need viewWillAppear
+        [self presentWallViewControllerAnimated:YES];
     } else {
+        
         [self _loadData];
         
     }
     
-    [self _loadData];
+//    [self _loadData];
     
     //  requesting and setting the user data from Facebook and sending the data to Parse
 
     
-
+#pragma possible code to delete
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(dismissKeyboard)];
     tapGestureRecognizer.cancelsTouchesInView = NO;
@@ -206,15 +212,17 @@
                     
                     // send all user objects to Parse asychonously
                     [user saveInBackground];
-                    [NSURLConnection sendAsynchronousRequest:urlRequest
-                                                       queue:[NSOperationQueue mainQueue]
-                                           completionHandler:
-                     ^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                         if (connectionError == nil && data != nil) {
-                             // Set the image in the imageView
-                             // ...
-                         }
-                     }];
+                    
+                    // code possibly not needed
+//                    [NSURLConnection sendAsynchronousRequest:urlRequest
+//                                                       queue:[NSOperationQueue mainQueue]
+//                                           completionHandler:
+//                     ^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+//                         if (connectionError == nil && data != nil) {
+//                             // Set the image in the imageView
+//                             // ...
+//                         }
+//                     }];
                     
                     
                     
@@ -228,12 +236,7 @@
     if ([PFUser currentUser] && // Check if user is cached
         [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) { // Check if user is linked to Facebook
             [self presentWallViewControllerAnimated:YES];
-        
-//        LoginViewController *controller = [[LoginViewController alloc] init];
-//        logInController.fields = (PFLogInFieldsUsernameAndPassword
-//                                  | PFLogInFieldsFacebook
-//                                  | PFLogInFieldsDismissButton);
-//        [self presentViewController:controller animated:YES];
+    
     }
 }
 
@@ -253,6 +256,7 @@
 }
 
 - (void)loginViewControllerDidLogin:(LoginViewController *)controller {
+    
     [self presentWallViewControllerAnimated:YES];
 }
 

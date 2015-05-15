@@ -18,7 +18,7 @@
 {
     self = [super init];
     if (self) {
-        NSLog(@"initalised");
+        NSLog(@"initialised");
     }
     return self;
 }

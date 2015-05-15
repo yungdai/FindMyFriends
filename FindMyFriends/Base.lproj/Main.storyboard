@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14E17e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -176,8 +176,38 @@
                     <view key="view" contentMode="scaleToFill" id="Pm5-CM-eAf">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gim-gV-LVX">
+                                <rect key="frame" x="5" y="0.0" width="84" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="84" id="jL9-Zm-Tc4"/>
+                                </constraints>
+                                <state key="normal" title="Logout">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Y0R-1A-ejj">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <connections>
+                                    <outlet property="delegate" destination="8mi-mc-y3K" id="Wtd-xe-PKV"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Y0R-1A-ejj" secondAttribute="trailing" id="Are-gT-N4U"/>
+                            <constraint firstItem="Y0R-1A-ejj" firstAttribute="top" secondItem="Pm5-CM-eAf" secondAttribute="top" id="JqQ-ih-C8z"/>
+                            <constraint firstItem="Y0R-1A-ejj" firstAttribute="bottom" secondItem="4oU-oU-dGV" secondAttribute="top" id="bC6-52-148"/>
+                            <constraint firstItem="gim-gV-LVX" firstAttribute="leading" secondItem="Pm5-CM-eAf" secondAttribute="leadingMargin" constant="-11" id="ffH-6b-dVs"/>
+                            <constraint firstItem="4oU-oU-dGV" firstAttribute="top" secondItem="gim-gV-LVX" secondAttribute="bottom" constant="551" id="sdx-1D-eWg"/>
+                            <constraint firstItem="Y0R-1A-ejj" firstAttribute="top" secondItem="gim-gV-LVX" secondAttribute="top" id="tUS-Wd-yoL"/>
+                            <constraint firstItem="Y0R-1A-ejj" firstAttribute="leading" secondItem="Pm5-CM-eAf" secondAttribute="leading" id="wW9-xW-Fai"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="logoutButton" destination="Y0R-1A-ejj" id="dnM-cX-c0o"/>
+                        <outlet property="mapView" destination="Y0R-1A-ejj" id="JEe-Ys-dSH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Omi-Xf-tM7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
