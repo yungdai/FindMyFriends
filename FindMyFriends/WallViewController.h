@@ -13,6 +13,16 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 
+// required classes for loging out
+// Facebook Framework's required API's
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "LoginViewController.h"
+
+// Parse Framework's API inheritence
+#import <Parse/Parse.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+
 @class WallViewController;
 
 @protocol WallViewControllerDelegate <NSObject>
@@ -21,11 +31,14 @@
 
 @end
 
-@interface WallViewController : UIViewController
+@interface WallViewController : UIViewController <LoginViewControllerDelegate, WallViewControllerDelegate>
 
 
 @property (weak, nonatomic) id<WallViewControllerDelegate> delegate;
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
-@property (strong, nonatomic) IBOutlet MKMapView *logoutButton;
+@property (strong, nonatomic) IBOutlet UIButton *logoutButton;
+
+
+- (IBAction)logoutButtonPressed:(id)sender;
 
 @end

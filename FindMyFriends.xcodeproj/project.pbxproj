@@ -33,7 +33,6 @@
 		1A41DC5F1B02493D00ECFAB1 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A41DC5C1B02493D00ECFAB1 /* FBSDKShareKit.framework */; };
 		1A41DC671B02697100ECFAB1 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A41DC661B02697100ECFAB1 /* LoginViewController.m */; };
 		1A41DC6D1B02C49F00ECFAB1 /* NewUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A41DC6C1B02C49F00ECFAB1 /* NewUserViewController.m */; };
-		1A6289B91B03B7D4005186A5 /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6289B81B03B7D4005186A5 /* ActivityView.m */; };
 		1A6289BD1B03D187005186A5 /* WallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6289BC1B03D187005186A5 /* WallViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -83,8 +82,6 @@
 		1A41DC661B02697100ECFAB1 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		1A41DC6B1B02C49F00ECFAB1 /* NewUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserViewController.h; sourceTree = "<group>"; };
 		1A41DC6C1B02C49F00ECFAB1 /* NewUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserViewController.m; sourceTree = "<group>"; };
-		1A6289B71B03B7D4005186A5 /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityView.h; sourceTree = "<group>"; };
-		1A6289B81B03B7D4005186A5 /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityView.m; sourceTree = "<group>"; };
 		1A6289BB1B03D187005186A5 /* WallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WallViewController.h; sourceTree = "<group>"; };
 		1A6289BC1B03D187005186A5 /* WallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WallViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -186,7 +183,6 @@
 		1A41DC111B023E9200ECFAB1 /* FindMyFriends */ = {
 			isa = PBXGroup;
 			children = (
-				1A41DC6E1B02C91A00ECFAB1 /* Views */,
 				1A41DC631B0267E800ECFAB1 /* Controllers */,
 				1A6289BA1B03D154005186A5 /* FindMyFriends View and Posts */,
 				1A41DC621B0267E200ECFAB1 /* Models */,
@@ -253,15 +249,6 @@
 				1A41DC6C1B02C49F00ECFAB1 /* NewUserViewController.m */,
 			);
 			name = "User Create/Login";
-			sourceTree = "<group>";
-		};
-		1A41DC6E1B02C91A00ECFAB1 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				1A6289B71B03B7D4005186A5 /* ActivityView.h */,
-				1A6289B81B03B7D4005186A5 /* ActivityView.m */,
-			);
-			name = Views;
 			sourceTree = "<group>";
 		};
 		1A6289BA1B03D154005186A5 /* FindMyFriends View and Posts */ = {
@@ -379,7 +366,6 @@
 				1A41DC6D1B02C49F00ECFAB1 /* NewUserViewController.m in Sources */,
 				1A41DC151B023E9200ECFAB1 /* main.m in Sources */,
 				1A06208F1B02D53B00826770 /* FindMyFriendsWallViewController.m in Sources */,
-				1A6289B91B03B7D4005186A5 /* ActivityView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

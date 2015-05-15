@@ -23,7 +23,7 @@
 #import "WallViewController.h"
 
 
-@interface AppDelegate ()<LoginViewControllerDelegate, WallViewControllerDelegate>
+@interface AppDelegate ()<LoginViewControllerDelegate>
 
 @end
 
@@ -39,19 +39,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [Parse setApplicationId:@"WTIpjvmocLnKmjegvp4Z1CHNnbP0IMKwjvJoUPqH" clientKey:@"CfIcbjiWafImIzBiiHBsK4BFGLaEgyd4QWFoPrPI"];
-    [PFUser enableRevocableSessionInBackground];
-    [FBSDKLoginButton class];
-    
-    [self checkUserDefaults];
-    
-    // Facebook API setup
-    [[FBSDKApplicationDelegate sharedInstance] application:application
-                             didFinishLaunchingWithOptions:launchOptions];
-    // Parse Facebook API setup
-    [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
-    
-    // Parse Analytics setup
-    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    PFUser *user = [PFUser currentUser];
     
     // Check for PFUser is current user
     if ([PFUser currentUser]) {
@@ -63,8 +51,25 @@
         
         // if not then you will be presented with the login page
         [self presentLoginViewController];
-
+        
     }
+    
+    
+    [FBSDKLoginButton class];
+    
+    // get muy user defaults from NSUserDefaults
+    [self checkUserDefaults];
+    
+    // Facebook API setup
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
+    // Parse Facebook API setup
+    [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
+    
+    // Parse Analytics setup
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+
     
 
     return YES;
@@ -74,6 +79,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *username = [defaults objectForKey:@"username"];
     NSString *objectID  = [defaults objectForKey:@"objectID"];
+    
 }
 
 - (BOOL)application:(UIApplication *)application
@@ -102,8 +108,8 @@
 
 - (void)presentWallViewControllerAnimated:(BOOL)animated {
     WallViewController *wallViewController = [[WallViewController alloc] init];
-    wallViewController.delegate = self;
-    [self.navigationController setViewControllers:@[ wallViewController ] animated:animated];
+    
+    
 }
 
 //- (void)settingsViewControllerDidLogout:(SettingsViewController *)controller {

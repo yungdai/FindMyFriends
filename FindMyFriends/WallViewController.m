@@ -7,25 +7,30 @@
 //
 
 #import "WallViewController.h"
+#import "LoginViewController.h"
 
-@interface WallViewController ()
+
+
+@interface WallViewController () 
 
 @end
 
 @implementation WallViewController
 
-- (instancetype)init
+/*- (instancetype)init
 {
     self = [super init];
     if (self) {
         NSLog(@"initialised");
     }
     return self;
-}
+}*/
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
+   // _view.backgroundColor = [UIColor blueColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,5 +47,23 @@
     // Pass the selected object to the new view controller.
 }
 */
+-(void)loginViewControllerDidLogin:(LoginViewController *)controller {
+    
+}
+- (IBAction)logoutButtonPressed:(id)sender {
+    [PFUser logOut];
+    
+    LoginViewController *viewController = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
+
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
+- (void)presentLoginViewController {
+    // Go to the welcome screen and have them log in or create an account.
+    LoginViewController *viewController = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
+    viewController.delegate = self;
+    [self.navigationController setViewControllers:@[ viewController ] animated:NO];
+}
+
 
 @end

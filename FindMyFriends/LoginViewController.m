@@ -10,7 +10,6 @@
 
 // adding in the NewUser and ActivityView  to be used
 #import "NewUserViewController.h"
-#import "ActivityView.h"
 #import "WallViewController.h"
 
 
@@ -62,8 +61,7 @@
     
     // check the userDefaults with Parse
     
-    
-    
+    NSLog(@"Login View Controller");
     
 
     if ([PFUser currentUser] && // Check if user is cached
@@ -81,19 +79,10 @@
         [self _loadData];
         
     }
+    
+//    [self _loadData];
 
 
-    
-    //  requesting and setting the user data from Facebook and sending the data to Parse
-
-    
-#pragma possible code to delete
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                           action:@selector(dismissKeyboard)];
-    tapGestureRecognizer.cancelsTouchesInView = NO;
-    [self.view addGestureRecognizer:tapGestureRecognizer];
-    
-    [self registerForKeyboardNotifications];
 
 }
 
@@ -114,9 +103,6 @@
     
     // Set permissions required from the facebook user account
     NSArray *permissionsArray = @[ @"email", @"public_profile", @"user_location", @"access_token"];
-    
-    // set up activityView
-    self.activityViewVisible = YES;
 
     
     // logging wiht PFUser using Facebook (this is a parse API to use Facebook)
@@ -135,14 +121,6 @@
             
         }
         
-
-        
-        // Log In (create/update currentUser) with FBSDKAccessToken
-   
-        
-        
-        
-        
         // If the user is not linked with the parse user link the parse user with Facebook
         if (![PFFacebookUtils isLinkedWithUser:user]) {
             [PFFacebookUtils linkUserInBackground:user withReadPermissions:nil block:^(BOOL succeeded, NSError *error) {
@@ -150,22 +128,20 @@
                     NSLog(@"Woohoo, user is linked with Facebook!");
                 }
             }];
-        } else {
-            
             
         }
         
         
     }];
     
-    FBSDKAccessToken *accessToken = [FBSDKAccessToken currentAccessToken];
-    [PFFacebookUtils logInInBackgroundWithAccessToken:accessToken block:^(PFUser *user, NSError *error) {
+    FBSDKAccessToken *facebookAccessToken = [FBSDKAccessToken currentAccessToken];
+    [PFFacebookUtils logInInBackgroundWithAccessToken:facebookAccessToken block:^(PFUser *user, NSError *error) {
         if (!user) {
             
             NSLog(@"Uh oh. There was an error logging in.");
         } else {
             NSLog(@"User logged in through Facebook!");
-            [user setObject:accessToken forKey:@"currentAccessToken"];
+            [user setObject:facebookAccessToken forKey:@"facebookeAccessToken"];
         }
     }];
     
@@ -217,6 +193,8 @@
 
                     }
                     
+                    
+                    // save all Facebook information to Prase
                     [user setObject:first_name forKey:@"first_name"];
                     [user setObject:last_name forKey:@"last_name"];
                     [user setObject:location forKey:@"location"];
@@ -233,10 +211,6 @@
                     // set up the UIImage variable for the facebook image
                     NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
                     
-                    
-                    // take the request and turn it into NSURLRequest
-                    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:pictureURL];
-                    
                     // the the request and store it as NSData
                     NSData *facebookPhoto = [[NSData alloc]initWithContentsOfURL:pictureURL];
                     
@@ -250,19 +224,7 @@
                     
                     // send all user objects to Parse asychonously
                     [user saveInBackground];
-                    
-                    // code possibly not needed
-//                    [NSURLConnection sendAsynchronousRequest:urlRequest
-//                                                       queue:[NSOperationQueue mainQueue]
-//                                           completionHandler:
-//                     ^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-//                         if (connectionError == nil && data != nil) {
-//                             // Set the image in the imageView
-//                             // ...
-//                         }
-//                     }];
-                    
-                    
+
                     
                 }
                 [self loginViewControllerDidLogin:self];
@@ -435,33 +397,6 @@
     
     [self.view endEditing:YES];
 }
-
-- (void)registerForKeyboardNotifications {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification object:nil];
-}
-
-- (void)keyboardWillShow:(NSNotification*)notification {
-    NSDictionary *userInfo = [notification userInfo];
-    CGRect endFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-
-    
-}
-
-- (void)keyboardWillHide:(NSNotification*)notification {
-    NSDictionary *userInfo = [notification userInfo];
-
-
-}
-
-- (IBAction)loginWithFacebookPressed:(id)sender {
-}
-
 
 
 - (void)didReceiveMemoryWarning {

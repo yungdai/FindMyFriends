@@ -10,9 +10,6 @@
 #import "WallViewController.h"
 
 
-// inheriting the ActivityView Class Object for the activity view
-#import "ActivityView.h"
-
 @interface NewUserViewController ()<UITextFieldDelegate, UIScrollViewDelegate, WallViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIButton *createAccountButton;
@@ -30,13 +27,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    // When you tape yourself dismiss the keyboard
-    UITapGestureRecognizer *tapeGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self
-                                                                                           action:@selector(dismissKeyboard)];
-    
-    [self.view addGestureRecognizer:tapeGestureRecognizer];
-    tapeGestureRecognizer.cancelsTouchesInView = NO;
-    [self registerForKeyboardNotifications];
     
 
 }
@@ -178,33 +168,9 @@
     [self.view endEditing:YES];
 }
 
-- (void)registerForKeyboardNotifications {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification object:nil];
-}
 
-- (void)keyboardWillShow:(NSNotification*)notification {
-    NSDictionary *userInfo = [notification userInfo];
-    CGRect endFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGRect keyboardFrame = [self.view convertRect:endFrame fromView:self.view.window];
-    CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    UIViewAnimationCurve curve = [userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
 
-    }
 
-- (void)keyboardWillHide:(NSNotification*)notification {
-    NSDictionary *userInfo = [notification userInfo];
-    CGRect endFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGRect keyboardFrame = [self.view convertRect:endFrame fromView:self.view.window];
-    CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    UIViewAnimationCurve curve = [userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
-    
-    }
 
 - (void)presentWallViewControllerAnimated:(BOOL)animated {
     WallViewController *wallViewController = [[WallViewController alloc]init];
