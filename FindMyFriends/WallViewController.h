@@ -25,5 +25,7 @@
 
 
 @property (weak, nonatomic) id<WallViewControllerDelegate> delegate;
+@property (strong, nonatomic) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) IBOutlet MKMapView *logoutButton;
 
 @end
