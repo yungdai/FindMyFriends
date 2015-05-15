@@ -43,6 +43,9 @@
 
 @implementation LoginViewController
 
+
+
+
 // method to deallocate the NSNotificaiton Controller
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -55,6 +58,15 @@
     // Facebook API setup
     FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc]init];
     
+    // setup the NSUserDefault
+    NSUserDefaults *userDefaults = [[NSUserDefaults standardUserDefaults]init];
+    [self returnUserDefaults];
+    
+    // check the userDefaults with Parse
+    
+    
+    
+    
     if ([FBSDKAccessToken currentAccessToken]) {
         // need to tell the API that I need view did load
 
@@ -62,6 +74,7 @@
         [self _loadData];
         
     }
+    
     
     [self _loadData];
     
@@ -76,6 +89,18 @@
     
     [self registerForKeyboardNotifications];
 
+}
+
+- (void)returnUserDefaults {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *name = [userDefaults objectForKey:@"name"];
+    NSString *objectID = [userDefaults objectForKey:@"objectID"];
+    
+}
+
+- (void)returnUserFacebookDefaults {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
 }
 
 - (void)_loadData {
@@ -163,6 +188,19 @@
                     NSString *facebookAccessToken = [FBSDKAccessToken currentAccessToken].tokenString;
                     // NSUserDefault setting of the facebookAccessToken
                     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                    [userDefaults setObject:facebookID forKey:@"id"];
+                    [userDefaults setObject:first_name forKey:@"first_name"];
+                    [userDefaults setObject:last_name forKey:@"last_name"];
+                    [userDefaults setObject:location forKey:@"location"];
+                    [userDefaults setObject:gender forKey:@"gender"];
+                    [userDefaults setObject:name forKey:@"name"];
+                    [userDefaults setObject:timezone forKey:@"timezone"];
+                    [userDefaults setObject:locale forKey:@"locale"];
+                    [userDefaults setObject:facebookAccessToken forKey:@"faceBookAccessToken"];
+                    
+                    // save the facebook information to the NSUserDefaults
+                    [userDefaults synchronize];
+                    
                     
                     if ([[userDefaults objectForKey:@"facebookeAccessToken"] isEqualToString:facebookAccessToken]) {
                         // set my user session to be active because the accessToken matches
@@ -170,7 +208,7 @@
                         
                     } else {
                         // the stored NSUserDefault token doesn't match with my current to token.  I will store my current tokent back into NSUserDefaults
-                        [userDefaults setObject:facebookAccessToken forKey:@"faceBookAccessToken"];
+
                     }
                     
                     [user setObject:first_name forKey:@"first_name"];
@@ -307,16 +345,24 @@
         return;
     }
     
-    
-
-    
+    //
+    // set up presistence of this Parse User
     // Everything looks good because all the code above passes; now try to log in
-
-    
     [PFUser logInWithUsernameInBackground:userName password:password block:^(PFUser *user, NSError *error) {
         
         if (user) {
             NSLog(@"User has logged in");
+            
+            // if the user logs in make sure you save his login information to the user defaults for persistent login.
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setObject:userName forKey:@"username"];
+            [userDefaults setObject:password forKey:@"password"];
+            [userDefaults setObject:user.objectId forKey:@"objectID"];
+            [userDefaults setObject:user.sessionToken forKey:@"sessionToken"];
+            
+            // save the user information into the APP (NSUserDefaults)
+            [userDefaults synchronize];
+            
             [self loginViewControllerDidLogin:self];
             
         } else {
@@ -340,6 +386,7 @@
             [self.usernameField becomeFirstResponder];
             
         }
+        
     }];
     
 }
@@ -356,8 +403,7 @@
 
 // When the app delegate sets up the LoginViewController it can set itself up as the delegate for that view controller.
 - (void)presentLoginViewController:(NewUserViewController *)controller {
-    LoginViewController *viewController = [[LoginViewController alloc]initWithNibName:nil
-                                                                               bundle:nil];
+    LoginViewController *viewController = [[LoginViewController alloc]initWithNibName:nil bundle:nil];
     viewController.delegate = self;
     [self.navigationController setViewControllers:@[ viewController ] animated:NO];
     

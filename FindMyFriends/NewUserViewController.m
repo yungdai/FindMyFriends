@@ -7,11 +7,13 @@
 //
 
 #import "NewUserViewController.h"
+#import "WallViewController.h"
+
 
 // inheriting the ActivityView Class Object for the activity view
 #import "ActivityView.h"
 
-@interface NewUserViewController ()<UITextFieldDelegate, UIScrollViewDelegate>
+@interface NewUserViewController ()<UITextFieldDelegate, UIScrollViewDelegate, WallViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIButton *createAccountButton;
 
@@ -131,15 +133,6 @@
     }
 
     // Everything looks good; try to log in.
-    ActivityView *activityView = [[ActivityView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.view.frame.size.width, self.view.frame.size.height)];
-    UILabel *label = activityView.label;
-    label.text = @"Signing You Up";
-    label.font = [UIFont boldSystemFontOfSize:20.f];
-    [activityView.activityIndicator startAnimating];
-    [activityView layoutSubviews];
-    
-    [self.view addSubview:activityView];
-    
     
     // Call into an object somewhere that has code for setting up a user.
     // The app delegate cares about this, but so do a lot of other objects.
@@ -148,6 +141,17 @@
     PFUser *user = [PFUser user];
     user.username = username;
     user.password = password;
+    
+    
+    // if the user logs in make sure you save his login information to the user defaults for persistent login.
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:user.username forKey:@"username"];
+    [userDefaults setObject:user.password forKey:@"password"];
+    [userDefaults setObject:user.objectId forKey:@"objectID"];
+    [userDefaults synchronize];
+    
+    
+    
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error){
 
         // if there is an error
@@ -158,17 +162,11 @@
                                                      cancelButtonTitle:nil
                                                      otherButtonTitles:@"OK", nil];
             [alertView show];
-            [activityView.activityIndicator startAnimating];
-            [activityView removeFromSuperview];
             // bring the keyboard back in case the user needs to change something
             [self.usernameField becomeFirstResponder];
             return;
             }
-        // Success!!
-        [activityView.activityIndicator stopAnimating];
-        [activityView removeFromSuperview];
         
-        [self dismissViewControllerAnimated:YES completion:nil];
         [self.delegate newUserViewControllerDidiSignup:self];
     }];
 }
@@ -208,7 +206,16 @@
     
     }
 
+- (void)presentWallViewControllerAnimated:(BOOL)animated {
+    WallViewController *wallViewController = [[WallViewController alloc]init];
+    wallViewController.delegate = self;
+    [self presentViewController:wallViewController animated:true completion:nil];
+}
 
+
+- (void)newUserViewControllerDidiSignup:(NewUserViewController *)controller {
+     [self presentWallViewControllerAnimated:YES];
+}
 /*
 #pragma mark - Navigation
 

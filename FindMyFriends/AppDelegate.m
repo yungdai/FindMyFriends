@@ -40,8 +40,18 @@
     [Parse setApplicationId:@"WTIpjvmocLnKmjegvp4Z1CHNnbP0IMKwjvJoUPqH" clientKey:@"CfIcbjiWafImIzBiiHBsK4BFGLaEgyd4QWFoPrPI"];
     [PFUser enableRevocableSessionInBackground];
     
-    // get the facebook access toke
+    [self checkUserDefaults];
     
+    // Facebook API setup
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
+    // Parse Facebook API setup
+    [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
+    
+    // Parse Analytics setup
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    // Check for PFUser is current user
     if ([PFUser currentUser]) {
         
         // present the wall viewcontroller right away if you are already logged in
@@ -55,14 +65,13 @@
     }
     
 
-    
-    [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
-    
-    // Override point for customization after application launch.
-    return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                    didFinishLaunchingWithOptions:launchOptions];
-    
-    
+    return YES;
+}
+
+- (void)checkUserDefaults {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *username = [defaults objectForKey:@"username"];
+    NSString *objectID  = [defaults objectForKey:@"objectID"];
 }
 
 - (BOOL)application:(UIApplication *)application
