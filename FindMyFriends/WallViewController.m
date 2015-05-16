@@ -9,7 +9,13 @@
 #import "WallViewController.h"
 #import "LoginViewController.h"
 
+// Facebook Framework's required API's
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
+// Parse Framework's API inheritence
+#import <Parse/Parse.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 
 @interface WallViewController () 
 
@@ -31,6 +37,8 @@
     
     // Do any additional setup after loading the view.
    // _view.backgroundColor = [UIColor blueColor];
+    FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
+    [FBSDKLoginButton class];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,9 +60,7 @@
 }
 - (IBAction)logoutButtonPressed:(id)sender {
     [PFUser logOut];
-    
     LoginViewController *viewController = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
-
     [self presentViewController:viewController animated:YES completion:nil];
 }
 

@@ -37,6 +37,7 @@
 @property (weak, nonatomic) id<WallViewControllerDelegate> delegate;
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) IBOutlet UIButton *logoutButton;
+@property (strong, nonatomic) IBOutlet FBSDKLoginButton *facebookLoginButton;
 
 
 - (IBAction)logoutButtonPressed:(id)sender;

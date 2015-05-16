@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14E17e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -197,6 +197,10 @@
                                     <action selector="logoutButtonPressed:" destination="8mi-mc-y3K" eventType="touchUpInside" id="RRK-Hj-2hU"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GXa-C4-UA9" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="16" y="85" width="166" height="35"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -205,6 +209,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="facebookLoginButton" destination="GXa-C4-UA9" id="r2y-2d-VFs"/>
                         <outlet property="logoutButton" destination="gim-gV-LVX" id="1nF-qB-K06"/>
                     </connections>
                 </viewController>
@@ -367,6 +372,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CII-4C-7n3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1145" y="261"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="7yk-qi-etG">
+            <objects>
+                <viewController id="9Pi-6x-yeA" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jdZ-oA-cDs"/>
+                        <viewControllerLayoutGuide type="bottom" id="6an-2o-2Hd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ee1-EJ-Ase">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v54-tw-FUq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
     <resources>
