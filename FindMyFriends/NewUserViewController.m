@@ -64,6 +64,10 @@
         [self processFieldEntries];
     }
     
+    if (textField == self.emailAddressField) {
+        [self.emailAddressField resignFirstResponder];
+    }
+    
     return YES;
 }
 
@@ -73,10 +77,12 @@
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
     NSString *passwordAgain = self.passwordAgainField.text;
+    NSString *emailAddress = self.emailAddressField.text;
     
     NSString *errorText = @"Please ";
     NSString *usernameBlankText = @"enter a username";
     NSString *passwordBlankText = @"enter a password";
+    NSString *emailBlankText = @"enter an email address";
     NSString *joinText = @", and ";
     NSString *passwordMismatchText = @"enter the same password twice";
     
@@ -84,7 +90,7 @@
 
     
     // Messaging nil will return 0, so these checks implicitly check for nil text.
-    if (username.length == 0 || password.length == 0 || passwordAgain.length == 0) {
+    if (username.length == 0 || password.length == 0 || passwordAgain.length == 0 || emailAddress.length == 0) {
         textError = YES;
         
         // Set up the keyboard for the first field missing input:
@@ -98,6 +104,10 @@
             [self.usernameField becomeFirstResponder];
         }
         
+        if (emailAddress.length ==0) {
+            [self.emailAddressField becomeFirstResponder];
+        }
+        
         if (username.length == 0) {
             errorText = [errorText stringByAppendingString:usernameBlankText];
         }
@@ -107,6 +117,10 @@
                 errorText = [errorText stringByAppendingString:joinText];
             }
             errorText = [errorText stringByAppendingString:passwordBlankText];
+        }
+        
+        if (emailAddress.length == 0) {
+            errorText = [errorText stringByAppendingString:emailBlankText];
         }
     } else if ([password compare:passwordAgain] != NSOrderedSame) {
         // We have non-zero strings.
@@ -131,6 +145,9 @@
     PFUser *user = [PFUser user];
     user.username = username;
     user.password = password;
+    user.email = emailAddress;
+    
+
     
     
     // if the user logs in make sure you save his login information to the user defaults for persistent login.

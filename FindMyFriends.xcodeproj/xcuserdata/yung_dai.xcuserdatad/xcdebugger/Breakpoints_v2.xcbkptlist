@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FindMyFriends/LoginViewController.m"
-            timestampString = "453431209.457541"
+            timestampString = "453612391.363731"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "283"
-            endingLineNumber = "283"
+            startingLineNumber = "281"
+            endingLineNumber = "281"
             landmarkName = "-processFieldEntries"
             landmarkType = "5">
          </BreakpointContent>
@@ -32,6 +32,68 @@
             startingLineNumber = "196"
             endingLineNumber = "196"
             landmarkName = "-viewDidAppear:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FindMyFriends/NewUserViewController.h"
+            timestampString = "453494232.552443"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "5"
+            endingLineNumber = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[NewUserViewController delegate]"
+                  moduleName = "FindMyFriends"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yung_dai/Documents/Bitmaker%20Labs/Objective-C/FindMyFriends/FindMyFriends/NewUserViewController.h"
+                  timestampString = "453612609.20558"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[NewUserViewController setDelegate:]"
+                  moduleName = "FindMyFriends"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yung_dai/Documents/Bitmaker%20Labs/Objective-C/FindMyFriends/FindMyFriends/NewUserViewController.h"
+                  timestampString = "453612609.205765"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FindMyFriends/LoginViewController.m"
+            timestampString = "453612623.731313"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "326"
+            endingLineNumber = "326"
+            landmarkName = "-facebookLoginChanged:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

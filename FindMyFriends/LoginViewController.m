@@ -47,7 +47,7 @@
     return userDefaults;
 }
 
-- (void)loadData {
+- (void)loadFaceBookData {
     
     // Set permissions required from the facebook user account
     NSArray *permissionsArray = @[ @"email", @"public_profile", @"user_location", @"access_token"];
@@ -199,12 +199,12 @@
         [self presentWallViewControllerAnimated:YES];
         
     } else if ([FBSDKAccessToken currentAccessToken]) {
+        NSLog(@"User access is granted through Facebook");
         // need to tell the API that I need viewWillAppear
         [self presentWallViewControllerAnimated:YES];
+
     } else {
-        
-        [self loadData];
-        
+//        [self loadData];
     }
 
 }
@@ -323,6 +323,10 @@
     
 }
 
+- (IBAction)facebookLoginChanged:(id)sender {
+    [self loadFaceBookData];
+    
+}
 
 // when a user new user signs up (this is part of the required NewUserViewController Delegate/Protocol)
 - (void)newUserViewControllerDidiSignup:(NewUserViewController *)controller {
@@ -348,14 +352,10 @@
 
 
 // When the LoginViewController instantiates and presents the NewUserViewController, it sets itself up as the delegate so it can be notified when a user signs up:
-- (void)presentNewUserViewController {
-//    NewUserViewController *viewController  = [[NewUserViewController alloc]initWithNibName:nil
-//                                                                                    bundle:nil];
-//    
-//    viewController.delegate = self;
-//    [self.navigationController presentViewController:viewController
-//                                            animated:YES
-//                                          completion:nil];
+- (void)presentNewUserViewControllerAnimated:(BOOL)animated {
+    NSLog(@"Presenting you the New User Screen");
+    NewUserViewController *newUserViewController  = [[NewUserViewController alloc] init];
+    [self presentLoginViewControllerAnimated:newUserViewController];
     
 }
 
@@ -390,5 +390,6 @@
     [PFUser logOut]; // log out
     NSLog(@"User has logged out");
 }
+
 
 @end
