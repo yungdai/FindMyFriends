@@ -47,6 +47,12 @@
     return userDefaults;
 }
 
+
+// when the Facebook Login/Logout Button is pressed
+- (IBAction)faceBookButtonPressed:(id)sender {
+    [self loadFaceBookData];
+}
+
 - (void)loadFaceBookData {
     
     // Set permissions required from the facebook user account
@@ -323,10 +329,7 @@
     
 }
 
-- (IBAction)facebookLoginChanged:(id)sender {
-    [self loadFaceBookData];
-    
-}
+
 
 // when a user new user signs up (this is part of the required NewUserViewController Delegate/Protocol)
 - (void)newUserViewControllerDidiSignup:(NewUserViewController *)controller {

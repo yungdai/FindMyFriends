@@ -129,6 +129,7 @@
                                 <rect key="frame" x="19" y="480" width="568" height="57"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
+                                    <action selector="faceBookButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="faw-eJ-wuT"/>
                                     <action selector="facebookLoginChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="RfG-oA-HLh"/>
                                 </connections>
                             </view>
