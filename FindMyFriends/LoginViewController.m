@@ -24,7 +24,7 @@
 @interface LoginViewController ()
 
 // declare my delegates
-<UITextFieldDelegate, NewUserViewControllerDelegate, LoginViewControllerDelegate, WallViewControllerDelegate>
+<UITextFieldDelegate, NewUserViewControllerDelegate, LoginViewControllerDelegate>
 
 
 
@@ -39,14 +39,21 @@
     NSString *name = [userDefaults objectForKey:@"name"];
     NSString *objectID = [userDefaults objectForKey:@"objectID"];
     
-}
-
-- (void)returnUserFacebookDefaults {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
 }
 
-- (void)loadData {
+- (NSUserDefaults *)returnUserFacebookDefaults {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return userDefaults;
+}
+
+
+// when the Facebook Login/Logout Button is pressed
+- (IBAction)faceBookButtonPressed:(id)sender {
+    [self loadFaceBookData];
+}
+
+- (void)loadFaceBookData {
     
     // Set permissions required from the facebook user account
     NSArray *permissionsArray = @[ @"email", @"public_profile", @"user_location", @"access_token"];
@@ -58,13 +65,13 @@
         if (!user) {
 
             NSLog(@"Uh oh. The user cancelled the Facebook login.");
-            
+  
         } else if (user.isNew) {
             NSLog(@"User signed up and logged in through Facebook!");
+            
         } else {
             NSLog(@"User logged in through Facebook!");
-            
-            
+            [self presentWallViewControllerAnimated:YES];
         }
         
         // If the user is not linked with the parse user link the parse user with Facebook
@@ -77,7 +84,6 @@
             
         }
         
-        
     }];
     
     FBSDKAccessToken *facebookAccessToken = [FBSDKAccessToken currentAccessToken];
@@ -85,6 +91,7 @@
         if (!user) {
             
             NSLog(@"Uh oh. There was an error logging in.");
+
         } else {
             NSLog(@"User logged in through Facebook!");
             [user setObject:facebookAccessToken forKey:@"facebookeAccessToken"];
@@ -95,6 +102,7 @@
     [PFFacebookUtils logInInBackgroundWithPublishPermissions:@[ @"publish_actions" ] block:^(PFUser *user, NSError *error) {
         if (!user) {
             NSLog(@"Uh oh. The user cancelled the Facebook login.");
+            [self presentLoginViewControllerAnimated:YES];
         } else {
             NSLog(@"User now has publish permissions!");
             FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]initWithGraphPath:@"me" parameters:nil];
@@ -173,7 +181,7 @@
 
                     
                 }
-                [self loginViewControllerDidLogin:self];
+                [self presentWallViewControllerAnimated:YES];
             }];
         }
     }];
@@ -197,12 +205,12 @@
         [self presentWallViewControllerAnimated:YES];
         
     } else if ([FBSDKAccessToken currentAccessToken]) {
+        NSLog(@"User access is granted through Facebook");
         // need to tell the API that I need viewWillAppear
         [self presentWallViewControllerAnimated:YES];
+
     } else {
-        
-        [self loadData];
-        
+//        [self loadData];
     }
 
 }
@@ -322,6 +330,7 @@
 }
 
 
+
 // when a user new user signs up (this is part of the required NewUserViewController Delegate/Protocol)
 - (void)newUserViewControllerDidiSignup:(NewUserViewController *)controller {
     
@@ -332,22 +341,24 @@
 
 
 // When the app delegate sets up the LoginViewController it can set itself up as the delegate for that view controller.
-- (void)presentLoginViewController:(NewUserViewController *)controller {
+- (void)presentLoginViewControllerAnimated:(BOOL)animated {
+    NSLog(@"Sending you to the loging screen");
     LoginViewController *loginViewController = [[LoginViewController alloc] init];
     [self presentViewController:loginViewController animated:YES completion:nil];
 }
 
+- (void)presentWallViewControllerAnimated:(BOOL)animated {
+    NSLog(@"Ah yyyeeeah, I gots the call");
+    WallViewController *wallViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"WallViewController"];
+    [self presentViewController:wallViewController animated:YES completion:nil];
+}
 
 
 // When the LoginViewController instantiates and presents the NewUserViewController, it sets itself up as the delegate so it can be notified when a user signs up:
-- (void)presentNewUserViewController {
-//    NewUserViewController *viewController  = [[NewUserViewController alloc]initWithNibName:nil
-//                                                                                    bundle:nil];
-//    
-//    viewController.delegate = self;
-//    [self.navigationController presentViewController:viewController
-//                                            animated:YES
-//                                          completion:nil];
+- (void)presentNewUserViewControllerAnimated:(BOOL)animated {
+    NSLog(@"Presenting you the New User Screen");
+    NewUserViewController *newUserViewController  = [[NewUserViewController alloc] init];
+    [self presentLoginViewControllerAnimated:newUserViewController];
     
 }
 
@@ -366,11 +377,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)presentWallViewControllerAnimated:(BOOL)animated {
-    NSLog(@"Ah yyyeeeah, I gots the call");
-    WallViewController *wallViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"WallViewController"];
-    [self presentViewController:wallViewController animated:YES completion:nil];
-}
+
 
 
 #pragma mark - Navigation
@@ -386,5 +393,6 @@
     [PFUser logOut]; // log out
     NSLog(@"User has logged out");
 }
+
 
 @end
