@@ -34,6 +34,7 @@
 		1A41DC671B02697100ECFAB1 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A41DC661B02697100ECFAB1 /* LoginViewController.m */; };
 		1A41DC6D1B02C49F00ECFAB1 /* NewUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A41DC6C1B02C49F00ECFAB1 /* NewUserViewController.m */; };
 		1A6289BD1B03D187005186A5 /* WallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6289BC1B03D187005186A5 /* WallViewController.m */; };
+		1AD37CCF1B0B750900513489 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 1AD37CCE1B0B750900513489 /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		1A41DC6C1B02C49F00ECFAB1 /* NewUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserViewController.m; sourceTree = "<group>"; };
 		1A6289BB1B03D187005186A5 /* WallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WallViewController.h; sourceTree = "<group>"; };
 		1A6289BC1B03D187005186A5 /* WallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WallViewController.m; sourceTree = "<group>"; };
+		1AD37CCE1B0B750900513489 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 		1A41DC061B023E9200ECFAB1 = {
 			isa = PBXGroup;
 			children = (
+				1AD37CCE1B0B750900513489 /* .gitignore */,
 				1A0620901B02D9B700826770 /* FBSDKCoreKit.framework */,
 				1A41DC5B1B02493D00ECFAB1 /* FBSDKLoginKit.framework */,
 				1A41DC5C1B02493D00ECFAB1 /* FBSDKShareKit.framework */,
@@ -340,6 +343,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AD37CCF1B0B750900513489 /* .gitignore in Resources */,
 				1A41DC1E1B023E9200ECFAB1 /* Main.storyboard in Resources */,
 				1A41DC231B023E9300ECFAB1 /* LaunchScreen.xib in Resources */,
 				1A41DC201B023E9200ECFAB1 /* Images.xcassets in Resources */,
