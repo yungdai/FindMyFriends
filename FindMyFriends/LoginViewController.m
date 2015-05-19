@@ -34,6 +34,32 @@
 
 @implementation LoginViewController
 
+
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [self returnUserDefaults];
+    
+    if ([PFUser currentUser] && // Check if user is cached
+        
+        [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) { // Check if user is linked to Facebook
+        NSLog(@"User is cached!");
+        // if the user is linked with facebook then show the view!
+        [self presentWallViewControllerAnimated:YES];
+        
+    } else if ([FBSDKAccessToken currentAccessToken]) {
+        NSLog(@"User access is granted through Facebook");
+        // got to the main app if the FBSDKacebookAccessToken is equal to the currentAccessToken
+        [self presentWallViewControllerAnimated:YES];
+        
+    } else {
+        //        [self loadData];
+    }
+    
+}
+
 - (void)returnUserDefaults {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *name = [userDefaults objectForKey:@"name"];
@@ -191,29 +217,7 @@
    
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [self returnUserDefaults];
-    
-    if ([PFUser currentUser] && // Check if user is cached
-        
-        [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) { // Check if user is linked to Facebook
-        NSLog(@"User is cached!");
-        // if the user is linked with facebook then show the view!
-        [self presentWallViewControllerAnimated:YES];
-        
-    } else if ([FBSDKAccessToken currentAccessToken]) {
-        NSLog(@"User access is granted through Facebook");
-        // need to tell the API that I need viewWillAppear
-        [self presentWallViewControllerAnimated:YES];
 
-    } else {
-//        [self loadData];
-    }
-
-}
 
 
 
