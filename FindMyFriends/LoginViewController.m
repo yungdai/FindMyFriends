@@ -52,6 +52,8 @@
     } else if ([FBSDKAccessToken currentAccessToken]) {
         NSLog(@"User access is granted through Facebook");
         // got to the main app if the FBSDKacebookAccessToken is equal to the currentAccessToken
+        
+//        [self loadFaceBookData];
         [self presentWallViewControllerAnimated:YES];
         
     } else {

@@ -85,7 +85,7 @@
 		1A41DC6C1B02C49F00ECFAB1 /* NewUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserViewController.m; sourceTree = "<group>"; };
 		1A6289BB1B03D187005186A5 /* WallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WallViewController.h; sourceTree = "<group>"; };
 		1A6289BC1B03D187005186A5 /* WallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WallViewController.m; sourceTree = "<group>"; };
-		1AD37CCE1B0B750900513489 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		1AD37CCE1B0B750900513489 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,7 +150,6 @@
 		1A41DC061B023E9200ECFAB1 = {
 			isa = PBXGroup;
 			children = (
-				1AD37CCE1B0B750900513489 /* .gitignore */,
 				1A0620901B02D9B700826770 /* FBSDKCoreKit.framework */,
 				1A41DC5B1B02493D00ECFAB1 /* FBSDKLoginKit.framework */,
 				1A41DC5C1B02493D00ECFAB1 /* FBSDKShareKit.framework */,
@@ -186,6 +185,7 @@
 		1A41DC111B023E9200ECFAB1 /* FindMyFriends */ = {
 			isa = PBXGroup;
 			children = (
+				1AD37CCE1B0B750900513489 /* .gitignore */,
 				1A41DC631B0267E800ECFAB1 /* Controllers */,
 				1A6289BA1B03D154005186A5 /* FindMyFriends View and Posts */,
 				1A41DC621B0267E200ECFAB1 /* Models */,
