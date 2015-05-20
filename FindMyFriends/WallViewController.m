@@ -37,8 +37,8 @@
     
     // Do any additional setup after loading the view.
    // _view.backgroundColor = [UIColor blueColor];
-    FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
-    [FBSDKLoginButton class];
+//    FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
+//    [FBSDKLoginButton class];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,11 +60,12 @@
 }
 - (IBAction)logoutButtonPressed:(id)sender {
     [PFUser logOut];
-    LoginViewController *viewController = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
-    [self presentViewController:viewController animated:YES completion:nil];
+//    LoginViewController *viewController = [[LoginViewController alloc] initWithNibName:nil bundle:nil];
+    NSLog(@"I've sent you to the login screen");
+    [self presentLoginViewControllerAnimated:YES];
 }
 
-- (void)presentLoginViewController {
+- (void)presentLoginViewControllerAnimated:(BOOL)animated {
     // Go to the welcome screen and have them log in or create an account.
     LoginViewController *loginViewController = [[LoginViewController alloc] init];
     [self presentViewController:loginViewController animated:YES completion:nil];
