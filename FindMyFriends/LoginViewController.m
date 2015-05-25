@@ -24,7 +24,7 @@
 @interface LoginViewController ()
 
 // declare my delegates
-<UITextFieldDelegate, NewUserViewControllerDelegate, LoginViewControllerDelegate>
+<UITextFieldDelegate, NewUserViewControllerDelegate, LoginViewControllerDelegate, FBSDKLoginButtonDelegate>
 
 
 
@@ -79,6 +79,18 @@
 // when the Facebook Login/Logout Button is pressed
 - (IBAction)faceBookButtonPressed:(id)sender {
     [self loadFaceBookData];
+}
+
+- (void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error {
+    
+    NSLog(@"%@",result);
+    NSLog(@"%@",error);
+    
+    
+}
+
+- (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {
+    [self logOut];
 }
 
 - (void)loadFaceBookData {
@@ -216,6 +228,8 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    
    
 }
 

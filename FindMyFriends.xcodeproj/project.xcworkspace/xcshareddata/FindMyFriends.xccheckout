@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>7CE486B8-C04C-42F4-8D26-82A5BCDAABE0</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>FindMyFriends</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>8193FD78D6F87FA9C27FF6AFC32AC032BB7DE517</key>
 		<string>https://github.com/yungdai/FindMyFriends.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>FindMyFriends.xcodeproj/project.xcworkspace</string>
+	<string>FindMyFriends.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>8193FD78D6F87FA9C27FF6AFC32AC032BB7DE517</key>

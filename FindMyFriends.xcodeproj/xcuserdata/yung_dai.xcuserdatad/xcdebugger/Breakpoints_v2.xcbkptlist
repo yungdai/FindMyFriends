@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FindMyFriends/LoginViewController.m"
-            timestampString = "453744975.715213"
+            timestampString = "454077790.183287"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289"
+            startingLineNumber = "301"
+            endingLineNumber = "301"
             landmarkName = "-processFieldEntries"
             landmarkType = "5">
          </BreakpointContent>
